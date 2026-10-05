@@ -1,6 +1,6 @@
 # ~/.config/wifi-manager/config.toml
 
-position = "center"
+position = "top-left"
 
 # Margin offsets in pixels (only effective on anchored edges).
 margin_top = 45
