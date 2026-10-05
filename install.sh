@@ -42,6 +42,10 @@ AUR_PKGS=(
 CONFIGS=(cava fish fuzzel hypr kitty rofi swaync waybar wifi-manager)
 FILES=(starship.toml)
 
+# Themes
+THEMES_SRC="$DOTFILES/dotfiles/.themes"
+THEMES=(Gruvbox-Material-Dark Gruvbox-Material-Dark-HIDPI)
+
 # ─────────────────────────────────────────────
 # Parse flags
 # ─────────────────────────────────────────────
@@ -128,7 +132,6 @@ install_arch() {
         if [[ ! "$reply" =~ ^[Yy]?$ ]]; then
             warn "Skipping official-repo install."
         else
-            # --needed avoids reinstalling; --noconfirm skips per-pkg prompts
             sudo pacman -S --needed --noconfirm "${to_install[@]}" || \
                 warn "Some packages failed to install. Check output above."
         fi
@@ -196,6 +199,28 @@ link_configs() {
 }
 
 # ─────────────────────────────────────────────
+# Symlink themes
+# ─────────────────────────────────────────────
+link_themes() {
+    step "Symlinking themes into ~/.themes/"
+    mkdir -p "$HOME/.themes"
+
+    for theme in "${THEMES[@]}"; do
+        [ -d "$THEMES_SRC/$theme" ] || { warn "$theme not found, skipping"; continue; }
+        local dest="$HOME/.themes/$theme"
+
+        if [ -e "$dest" ] && [ ! -L "$dest" ]; then
+            mkdir -p "$BACKUP/.themes"
+            mv "$dest" "$BACKUP/.themes/"
+            info "Backed up existing $dest"
+        fi
+        [ -L "$dest" ] && rm "$dest"
+        ln -sfn "$THEMES_SRC/$theme" "$dest"
+        info "Linked $dest → $THEMES_SRC/$theme"
+    done
+}
+
+# ─────────────────────────────────────────────
 # Main
 # ─────────────────────────────────────────────
 info "Detected distro: $DISTRO"
@@ -207,6 +232,7 @@ else
 fi
 
 link_configs
+link_themes
 
 echo
 info "Done!"
