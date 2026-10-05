@@ -13,17 +13,11 @@ My personal Hyprland setup on CachyOS.
 | `swaync` | Notification daemon |
 | `rofi` | Application launcher |
 | `fuzzel` | Alternative launcher |
-| `thunar` | File manager |
-| `helium` | Browser |
 | `kitty` | Terminal emulator |
 | `fish` | Shell |
-| `awww` | Wallpaper |
-| `waypaper` | Wallpaper manager (GUI) |
 | `starship` | Shell prompt |
 | `cava` | Audio visualizer |
-| `VScodium` | Code editor |
 | `wifi-manager` | Wi-Fi management (TUI/GUI) |
-| `paru` | AUR helper |
 | `Gruvbox-Material-Dark` | GTK theme |
 
 ## Keybindings
