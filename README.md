@@ -92,6 +92,14 @@ The script will:
 - The script symlinks configs into `~/.config/` and themes into `~/.themes/`,
 backing up anything it overwrites to `~/.dotfiles-backup-<timestamp>`.
 
+## update config
+
+if you want to update your config to a newer verion, run:
+
+```bash
+./update_config.sh
+```
+
 ## install dependencys sepearatly 
 
 ```bash
