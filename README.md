@@ -42,8 +42,7 @@ My personal Hyprland setup on CachyOS. Originally based on
 | `SUPER + ←/→/↑/↓` | Focus window | `SUPER + P` | Color picker |
 | `SUPER + H/L/K/J` | Focus (Vim) | `SUPER + R` | Reload waybar |
 | `SUPER + ALT + ←/→` | Resize H | `Print` / `SUPER + S` | Screenshot |
-| `SUPER + mouse:272` | Drag | `CTRL + ALT + ←/→/↑/↓` | Move window |
-| `SUPER + mouse:273` | Resize | `SUPER + Tab` | Next workspace |
+| `CTRL + ALT + ←/→/↑/↓` | Move window | `SUPER + Tab` | Next workspace |
 
 > **Note:** This configuration uses Hyprland's Lua syntax (0.55+). Keybinds are
 > defined with `hl.bind()` in `hypr/binds.lua`. If you're on an older Hyprland
