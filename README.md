@@ -18,7 +18,6 @@ My personal Hyprland setup on CachyOS.
 | `waybar` | Status bar |
 | `swaync` | Notification daemon |
 | `rofi` | Application launcher |
-| `fuzzel` | Alternative launcher |
 | `kitty` | Terminal emulator |
 | `fish` | Shell |
 | `starship` | Shell prompt |
@@ -55,7 +54,7 @@ My personal Hyprland setup on CachyOS.
 - Hyprland
 - Waybar
 - SwayNC
-- Rofi / Fuzzel
+- Rofi
 - Kitty
 - VS codium
 - Fish shell
