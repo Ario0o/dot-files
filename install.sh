@@ -28,7 +28,7 @@ PACMAN_PKGS=(
     bluez bluez-utils blueman vscodium
     polkit-kde-agent xdg-desktop-portal-hyprland
     qt5-wayland qt6-wayland
-    ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji
+    ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji vim
 )
 
 AUR_PKGS=(

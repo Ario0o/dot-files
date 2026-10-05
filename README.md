@@ -60,6 +60,7 @@ My personal Hyprland setup on CachyOS.
 - wifi manager
 - helium
 - paru
+- vim
 
 Install on Arch/CachyOS:
 
@@ -100,7 +101,7 @@ sudo pacman -S --needed --noconfirm \
     polkit-kde-agent xdg-desktop-portal-hyprland \
     qt5-wayland qt6-wayland \
     ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji \
-    vscodium paru
+    vscodium paru vim
 ```
 
 ```bash
