@@ -92,6 +92,7 @@ CONFIGS=(
     cava
     fish
     fuzzel
+    gtk-3.0
     hypr
     kitty
     rofi
@@ -208,6 +209,14 @@ install_arch() {
     local aur_to_install=()
     local aur_helper=""
 
+    # Update the entire system before installing packages
+    step "Updating the system"
+
+    if ! sudo pacman -Syu; then
+        error "System update failed."
+        return 1
+    fi
+
     # Check official repository packages
     for pkg in "${PACMAN_PKGS[@]}"; do
         if pacman -Qi "$pkg" &>/dev/null; then
@@ -235,7 +244,7 @@ install_arch() {
         fi
     fi
 
-    # Detect the AUR helper after.
+    # Detect the AUR helpe.
     if command -v paru >/dev/null 2>&1; then
         aur_helper="paru"
     elif command -v yay >/dev/null 2>&1; then
@@ -274,6 +283,7 @@ install_arch() {
         warn "Skipping AUR package installation."
     fi
 }
+
 
 # ─────────────────────────────────────────────
 # Backup helper
