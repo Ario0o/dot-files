@@ -1,0 +1,239 @@
+
+/* ==============================================
+   Gruvbox Material Dark (Soft) Palette
+   ============================================== */
+
+@define-color bg0 #32302f;
+@define-color bg1 #3c3836;
+@define-color bg2 #5a524c;
+@define-color fg0 #ddc7a1;
+@define-color fg1 #ebdbb2;
+@define-color gray #7c6f64;
+@define-color red #ea6962;
+@define-color orange #e78a4e;
+@define-color yellow #d8a657;
+@define-color green #a9b665;
+@define-color aqua #89b482;
+@define-color blue #7daea3;
+@define-color purple #d3869b;
+
+/* ==============================================
+   Base Window
+   ============================================== */
+.control-center {
+  background: @bg0;
+  border: 2px solid @bg2;
+  border-radius: 12px;
+  color: @fg0;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 14px;
+}
+
+/* ==============================================
+   Title Header
+   ============================================== */
+.widget-title {
+  margin: 8px;
+  font-size: 1.5rem;
+  color: @fg1;
+}
+
+.widget-title button {
+  background: @bg1;
+  color: @fg0;
+  border: 1px solid @bg2;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 0.85rem;
+}
+
+.widget-title button:hover {
+  background: @bg2;
+  color: @yellow;
+}
+
+/* ==============================================
+   Do Not Disturb
+   ============================================== */
+.widget-dnd {
+  margin: 8px;
+  font-size: 1.1rem;
+  color: @fg0;
+}
+
+.widget-dnd switch {
+  background: @bg2;
+  border-radius: 12px;
+}
+
+.widget-dnd switch:checked {
+  background: @green;
+}
+
+.widget-dnd switch slider {
+  background: @fg1;
+  border-radius: 50%;
+}
+
+/* ==============================================
+   Volume & Backlight Sliders
+   ============================================== */
+.widget-volume,
+.widget-backlight {
+  margin: 8px;
+  padding: 10px;
+  background: @bg1;
+  border-radius: 8px;
+  color: @fg0;
+}
+
+.widget-volume trough,
+.widget-backlight trough {
+  background: @bg2;
+  border-radius: 6px;
+  min-height: 8px;
+}
+
+.widget-volume highlight,
+.widget-backlight highlight {
+  background: @blue;
+  border-radius: 6px;
+}
+
+.widget-volume slider,
+.widget-backlight slider {
+  background: @fg1;
+  border-radius: 50%;
+  min-width: 14px;
+  min-height: 14px;
+  margin: -3px 0;
+}
+
+/* ==============================================
+   Buttons Grid (Wi-Fi, Bluetooth, etc.)
+   ============================================== */
+.widget-buttons-grid {
+  margin: 8px;
+  padding: 6px;
+  background: @bg1;
+  border-radius: 8px;
+}
+
+.widget-buttons-grid button {
+  background: @bg2;
+  color: @fg0;
+  border: 1px solid @bg2;
+  border-radius: 8px;
+  padding: 10px;
+  min-width: 50px; 
+  min-height: 50px;
+  font-size: 1.2rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.widget-buttons-grid button:hover {
+  background: @bg0;
+  color: @yellow;
+  border-color: @yellow;
+}
+
+/* Active toggle state (e.g., Wi-Fi On, Bluetooth On, Muted) */
+.widget-buttons-grid button.active {
+  background: @green;
+  color: @bg0;
+  border-color: @green;
+}
+
+/* ==============================================
+   MPRIS Media Player
+   ============================================== */
+.widget-mpris {
+  margin: 8px;
+  padding: 10px;
+  background: @bg1;
+  border-radius: 8px;
+}
+
+.widget-mpris-title {
+  color: @fg1;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.widget-mpris-subtitle {
+  color: @gray;
+  font-size: 0.9rem;
+}
+
+.widget-mpris button {
+  background: @bg2;
+  color: @fg0;
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  margin: 0 4px;
+}
+
+.widget-mpris button:hover {
+  background: @blue;
+  color: @bg0;
+}
+
+/* ==============================================
+   Notifications
+   ============================================== */
+.notification-row {
+  margin: 4px 8px;
+}
+
+.notification {
+  background: @bg1;
+  border: 1px solid @bg2;
+  border-radius: 8px;
+  color: @fg0;
+  padding: 12px;
+}
+
+.notification:hover {
+  background: @bg2;
+}
+
+.notification .title {
+  color: @fg1;
+  font-weight: bold;
+  font-size: 1.05rem;
+}
+
+.notification .body {
+  color: @fg0;
+  font-size: 0.95rem;
+}
+
+.notification .time {
+  color: @gray;
+  font-size: 0.8rem;
+}
+
+/* Close button on notifications */
+.close-button {
+  background: @red;
+  color: @bg0;
+  border-radius: 50%;
+  padding: 4px;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.close-button:hover {
+  background: @orange;
+}
+
+/* Critical / Urgent Notifications */
+.critical {
+  border: 2px solid @red;
+}
+
+.low {
+  border: 2px solid @blue;
+}
