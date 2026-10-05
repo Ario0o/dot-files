@@ -1,7 +1,6 @@
 # my hyprland Dotfiles
 
-My personal Hyprland setup on CachyOS. Originally based on
-[babyanonymouse/Zero_Drag.dotfiles](https://github.com/babyanonymouse/Zero_Drag.dotfiles).
+My personal Hyprland setup on CachyOS. 
 
 ![screenshot](screenshot.png)
 
@@ -25,6 +24,7 @@ My personal Hyprland setup on CachyOS. Originally based on
 | `VScodium` | Code editor |
 | `wifi-manager` | Wi-Fi management (TUI/GUI) |
 | `paru` | AUR helper |
+| `Gruvbox-Material-Dark` | GTK theme |
 
 ## Keybindings
 
@@ -87,8 +87,8 @@ If you prefer to only symlink the configuration files without installing any dep
 
 The script will:
 - Detect your distribution (auto-install supported for Arch/CachyOS).
-- Symlink the configuration files into `~/.config/`.
-- Back up any existing files to `~/.dotfiles-backup-<timestamp>`.
+- The script symlinks configs into `~/.config/` and themes into `~/.themes/`,
+backing up anything it overwrites to `~/.dotfiles-backup-<timestamp>`.
 
 ## install dependencys sepearatly 
 
@@ -117,3 +117,9 @@ paru -S --needed \
     otf-geist-mono-nerd \
     waypaper
 ```
+## Mentions
+Originally based on
+[babyanonymouse/Zero_Drag.dotfiles](https://github.com/babyanonymouse/Zero_Drag.dotfiles).
+
+Gruvbox material themes from
+[TheGreatMcPain/gruvbox-material-gtk](https://github.com/TheGreatMcPain/gruvbox-material-gtk).
