@@ -26,6 +26,30 @@ My personal Hyprland setup on CachyOS. Originally based on
 | `wifi-manager` | Wi-Fi management (TUI/GUI) |
 | `paru` | AUR helper |
 
+## Keybindings
+
+`mainMod` = `SUPER`. Full list in `hypr/binds.lua`.
+
+| Key | Action | Key | Action |
+|-----|--------|-----|--------|
+| `SUPER + Return` | Terminal | `SUPER + Q` | Close window |
+| `SUPER + E` | File manager | `SUPER + F` | Fullscreen |
+| `SUPER + Space` | Launcher | `SUPER + G` | Float |
+| `SUPER + B` | Browser | `SUPER + M` | Maximize |
+| `SUPER + T` | Editor | `SUPER + L` | Lock screen |
+| `SUPER + 1–9` | Workspace 1–9 | `SUPER + W` | Wallpaper |
+| `SUPER + SHIFT + 1–9` | Move to workspace | `SUPER + V` | Clipboard |
+| `SUPER + ←/→/↑/↓` | Focus window | `SUPER + P` | Color picker |
+| `SUPER + H/L/K/J` | Focus (Vim) | `SUPER + R` | Reload waybar |
+| `SUPER + ALT + ←/→` | Resize H | `Print` / `SUPER + S` | Screenshot |
+| `SUPER + mouse:272` | Drag | `CTRL + ALT + ←/→/↑/↓` | Move window |
+| `SUPER + mouse:273` | Resize | `SUPER + Tab` | Next workspace |
+
+> **Note:** This configuration uses Hyprland's Lua syntax (0.55+). Keybinds are
+> defined with `hl.bind()` in `hypr/binds.lua`. If you're on an older Hyprland
+> version using `hyprlang`, you'll need to convert these to `bind = MOD, KEY, ...`
+> format.
+
 ## Requirements
 
 - Hyprland
