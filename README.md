@@ -4,9 +4,11 @@ My personal Hyprland setup on CachyOS.
 
 ## Screenshots
 
-| screenshots|
-|------------|
-| ![Desktop](screenshots/screenshot.png) | ![Terminal](screenshots/screenshot-2.png) | ![Launcher](screenshots/screenshot-2.png)
+![Desktop](screenshots/screenshot.png)
+
+![Terminal](screenshots/screenshot-2.png)
+
+![Launcher](screenshots/screenshot-3.png)
 
 ## What's Inside
 
