@@ -139,7 +139,7 @@ Usage: ./install.sh [OPTIONS]
 
 Options:
   --no-deps     Skip dependency installation
-  --help, -h    Show this help message
+  --help -h     Show this help message
 EOF
             exit 0
             ;;
