@@ -46,6 +46,29 @@ My personal Hyprland setup on CachyOS. Originally based on
 
 Install on Arch/CachyOS:
 
+## Installation
+
+clone this repository and run the installation script.
+
+```bash
+git clone https://github.com/Ario0o/dot-files ~/dot-files
+cd ~/dot-files
+./install.sh
+```
+
+If you prefer to only symlink the configuration files without installing any dependencies, run:
+
+```bash
+./install.sh --no-deps
+```
+
+The script will:
+- Detect your distribution (auto-install supported for Arch/CachyOS).
+- Symlink the configuration files into `~/.config/`.
+- Back up any existing files to `~/.dotfiles-backup-<timestamp>`.
+
+## install dependencys sepearatly 
+
 ```bash
 sudo pacman -S --needed --noconfirm \
     hyprland swaync \
@@ -71,24 +94,3 @@ paru -S --needed \
     otf-geist-mono-nerd \
     waypaper
 ```
-
-## Installation
-
-clone this repository and run the installation script.
-
-```bash
-git clone https://github.com/Ario0o/dot-files ~/dot-files
-cd ~/dot-files
-./install.sh
-```
-
-If you prefer to only symlink the configuration files without installing any dependencies, run:
-
-```bash
-./install.sh --no-deps
-```
-
-The script will:
-- Detect your distribution (auto-install supported for Arch/CachyOS).
-- Symlink the configuration files into `~/.config/`.
-- Back up any existing files to `~/.dotfiles-backup-<timestamp>`.
