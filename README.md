@@ -126,7 +126,7 @@ paru -S --needed \
     otf-geist-mono-nerd \
     waypaper
 ```
-## Mentions
+## Credits 
 Originally based on
 [babyanonymouse/Zero_Drag.dotfiles](https://github.com/babyanonymouse/Zero_Drag.dotfiles).
 
