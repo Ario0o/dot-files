@@ -90,8 +90,7 @@ if you like to use symlink instead, run:
 
 ```bash
 ./install.sh --symlink
-```
-```bash
+
 ./install.sh --symlink --no-deps
 ```
 
