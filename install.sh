@@ -68,6 +68,7 @@ PACMAN_PKGS=(
     pipewire-pulse
     wireplumber
     pavucontrol
+    pamixer
     bluez
     bluez-utils
     blueman
