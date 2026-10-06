@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# update_configs.sh - Update the dotfiles repository and apply the latest configs
+# update_config.sh - Update the dotfiles repository and apply the latest configs
 
 set -Eeuo pipefail
 
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
+BLUE='\033[0;34m'
 NC='\033[0m'
 
 info() {
@@ -19,6 +20,37 @@ warn() {
 error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
+
+step() {
+    echo -e "${BLUE}==>${NC} $1"
+}
+
+USE_SYMLINKS=false
+
+for arg in "$@"; do
+    case "$arg" in
+        --symlink)
+            USE_SYMLINKS=true
+            ;;
+
+        --help|-h)
+            cat <<EOF
+Usage: ./update_config.sh [OPTIONS]
+
+Options:
+  --symlink     Update using symlinks
+  --help, -h    Show this help message
+EOF
+            exit 0
+            ;;
+
+        *)
+            error "Unknown option: $arg"
+            echo "Use './update_config.sh --help' for usage."
+            exit 2
+            ;;
+    esac
+done
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -44,7 +76,7 @@ if [[ -n "$(git status --porcelain)" ]]; then
     exit 1
 fi
 
-info "Downloading the latest dotfiles..."
+step "Downloading the latest dotfiles"
 
 if ! git pull --ff-only; then
     error "Could not update the repository."
@@ -52,14 +84,30 @@ if ! git pull --ff-only; then
     exit 1
 fi
 
-info "Applying the updated configuration files..."
+INSTALL_ARGS=(--no-deps)
+
+if [[ "$USE_SYMLINKS" == true ]]; then
+    info "Applying the configuration using symlinks."
+    INSTALL_ARGS+=(--symlink)
+else
+    info "Applying the configuration as normal copied files."
+fi
+
+echo
 
 if [[ -x "./install.sh" ]]; then
-    ./install.sh
+    ./install.sh "${INSTALL_ARGS[@]}"
 else
-    bash ./install.sh
+    bash ./install.sh "${INSTALL_ARGS[@]}"
 fi
 
 echo
 info "Dotfiles updated successfully."
+
+if [[ "$USE_SYMLINKS" == true ]]; then
+    info "Symlink mode was used."
+else
+    info "Normal copy mode was used."
+fi
+
 info "Restart Hyprland or log out and back in if necessary."

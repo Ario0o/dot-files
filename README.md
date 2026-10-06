@@ -80,15 +80,23 @@ cd ~/dot-files
 ./install.sh
 ```
 
-If you prefer to only symlink the configuration files without installing any dependencies, run:
+If you prefer to only install the configuration files without installing any dependencies, run:
 
 ```bash
 ./install.sh --no-deps
 ```
+if you like to use symlinks instead, run:
+
+```bash
+./install.sh --symlinks
+```
+
+> **Note:** you can run ./install.sh --symlinks --no-deps to install the config files 
+> without installing any dependencies
 
 The script will:
 - Detect your distribution (auto-install supported for Arch/CachyOS).
-- The script symlinks configs into `~/.config/` and themes into `~/.themes/`,
+- The script install configs into `~/.config/` and themes into `~/.themes/`,
 backing up anything it overwrites to `~/.dotfiles-backup-<timestamp>`.
 
 ## update config
@@ -97,6 +105,11 @@ if you want to update your config to a newer verion, run:
 
 ```bash
 ./update_config.sh
+```
+if you installed the symlink version, run:
+
+```bash
+./update_config.sh ----symlink
 ```
 
 ## install dependencys sepearatly 

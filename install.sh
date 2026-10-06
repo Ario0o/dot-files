@@ -35,11 +35,12 @@ if [[ $EUID -eq 0 ]]; then
 fi
 
 # ─────────────────────────────────────────────
-# Configuration
+# Paths and configuration
 # ─────────────────────────────────────────────
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC="$DOTFILES/dotfiles/.config"
+THEMES_SRC="$DOTFILES/dotfiles/.themes"
 BACKUP="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 
 PACMAN_PKGS=(
@@ -105,12 +106,47 @@ FILES=(
     starship.toml
 )
 
-THEMES_SRC="$DOTFILES/dotfiles/.themes"
-
 THEMES=(
     Gruvbox-Material-Dark
     Gruvbox-Material-Dark-HIDPI
 )
+
+# ─────────────────────────────────────────────
+# Options
+# ─────────────────────────────────────────────
+
+SKIP_DEPS=false
+USE_SYMLINKS=false
+
+for arg in "$@"; do
+    case "$arg" in
+        --no-deps)
+            SKIP_DEPS=true
+            ;;
+
+        --symlink)
+            USE_SYMLINKS=true
+            ;;
+
+        --help|-h)
+            cat <<EOF
+Usage: ./install.sh [OPTIONS]
+
+Options:
+  --no-deps     Skip dependency installation
+  --symlink     Symlink configs instead of copying them
+  --help, -h    Show this help message
+EOF
+            exit 0
+            ;;
+
+        *)
+            error "Unknown option: $arg"
+            echo "Use './install.sh --help' for usage."
+            exit 2
+            ;;
+    esac
+done
 
 # ─────────────────────────────────────────────
 # Validate source directories
@@ -123,35 +159,19 @@ if [[ ! -d "$SRC" ]]; then
 fi
 
 # ─────────────────────────────────────────────
-# Parse command-line arguments
+# Prompt helper
 # ─────────────────────────────────────────────
 
-SKIP_DEPS=false
+confirm() {
+    local prompt="$1"
+    local reply
 
-for arg in "$@"; do
-    case "$arg" in
-        --no-deps)
-            SKIP_DEPS=true
-            ;;
+    if ! read -r -p "$prompt [Y/n] " reply; then
+        reply="n"
+    fi
 
-        --help|-h)
-            cat <<EOF
-Usage: ./install.sh [OPTIONS]
-
-Options:
-  --no-deps     Skip dependency installation
-  --help -h     Show this help message
-EOF
-            exit 0
-            ;;
-
-        *)
-            error "Unknown option: $arg"
-            echo "Use './install.sh --help' for usage."
-            exit 2
-            ;;
-    esac
-done
+    [[ "$reply" =~ ^[Yy]?$ ]]
+}
 
 # ─────────────────────────────────────────────
 # Distro detection
@@ -168,21 +188,6 @@ detect_distro() {
 }
 
 DISTRO="$(detect_distro)"
-
-# ─────────────────────────────────────────────
-# Prompt helper
-# ─────────────────────────────────────────────
-
-confirm() {
-    local prompt="$1"
-    local reply
-
-    if ! read -r -p "$prompt [Y/n] " reply; then
-        reply="n"
-    fi
-
-    [[ "$reply" =~ ^[Yy]?$ ]]
-}
 
 # ─────────────────────────────────────────────
 # Package installation
@@ -209,7 +214,7 @@ install_arch() {
     local aur_to_install=()
     local aur_helper=""
 
-    # Update the entire system before installing packages
+    # Update the entire system first
     step "Updating the system"
 
     if ! sudo pacman -Syu; then
@@ -217,7 +222,7 @@ install_arch() {
         return 1
     fi
 
-    # Check official repository packages
+    # Find missing official repository packages
     for pkg in "${PACMAN_PKGS[@]}"; do
         if pacman -Qi "$pkg" &>/dev/null; then
             info "✓ $pkg already installed"
@@ -227,7 +232,7 @@ install_arch() {
     done
 
     if [[ ${#to_install[@]} -eq 0 ]]; then
-        info "All official-repository packages are already installed."
+        info "All official repository packages are already installed."
     else
         echo
         warn "The following packages will be installed from official repositories:"
@@ -240,11 +245,12 @@ install_arch() {
                 return 1
             fi
         else
-            warn "Skipping official-repository package installation."
+            warn "Skipping official repository package installation."
         fi
     fi
 
-    # Detect the AUR helpe.
+    # Detect AUR helper after installing official packages.
+    # This allows paru from PACMAN_PKGS to become available.
     if command -v paru >/dev/null 2>&1; then
         aur_helper="paru"
     elif command -v yay >/dev/null 2>&1; then
@@ -255,7 +261,7 @@ install_arch() {
         return 0
     fi
 
-    # Check AUR packages
+    # Find missing AUR packages
     for pkg in "${AUR_PKGS[@]}"; do
         if pacman -Qi "$pkg" &>/dev/null; then
             info "✓ $pkg already installed"
@@ -284,7 +290,6 @@ install_arch() {
     fi
 }
 
-
 # ─────────────────────────────────────────────
 # Backup helper
 # ─────────────────────────────────────────────
@@ -299,79 +304,84 @@ backup_path() {
 }
 
 # ─────────────────────────────────────────────
-# Symlink configs
+# Copy or symlink helper
 # ─────────────────────────────────────────────
 
-link_configs() {
-    step "Symlinking configs into ~/.config/"
+install_path() {
+    local source="$1"
+    local destination="$2"
+    local backup_dir="$3"
+
+    if [[ ! -e "$source" && ! -L "$source" ]]; then
+        warn "$source not found; skipping."
+        return 0
+    fi
+
+    mkdir -p "$(dirname "$destination")"
+
+    # Back up existing regular files/directories.
+    # Remove existing symlinks without backing them up.
+    if [[ -e "$destination" && ! -L "$destination" ]]; then
+        backup_path "$destination" "$backup_dir"
+    elif [[ -L "$destination" ]]; then
+        rm -f "$destination"
+    fi
+
+    if [[ "$USE_SYMLINKS" == true ]]; then
+        ln -s "$source" "$destination"
+        info "Linked $destination → $source"
+    else
+        cp -a "$source" "$destination"
+        info "Copied $source → $destination"
+    fi
+}
+
+# ─────────────────────────────────────────────
+# Install configs
+# ─────────────────────────────────────────────
+
+install_configs() {
+    if [[ "$USE_SYMLINKS" == true ]]; then
+        step "Installing configs as symlinks"
+    else
+        step "Installing configs normally"
+    fi
 
     mkdir -p "$HOME/.config"
 
     for cfg in "${CONFIGS[@]}"; do
-        local source="$SRC/$cfg"
-        local dest="$HOME/.config/$cfg"
-
-        if [[ ! -d "$source" ]]; then
-            warn "$source not found; skipping."
-            continue
-        fi
-
-        if [[ -e "$dest" && ! -L "$dest" ]]; then
-            backup_path "$dest" "$BACKUP/.config"
-        elif [[ -L "$dest" ]]; then
-            rm -f "$dest"
-        fi
-
-        ln -s "$source" "$dest"
-        info "Linked $dest → $source"
+        install_path \
+            "$SRC/$cfg" \
+            "$HOME/.config/$cfg" \
+            "$BACKUP/.config"
     done
 
     for file in "${FILES[@]}"; do
-        local source="$SRC/$file"
-        local dest="$HOME/.config/$file"
-
-        if [[ ! -f "$source" ]]; then
-            warn "$source not found; skipping."
-            continue
-        fi
-
-        if [[ -e "$dest" && ! -L "$dest" ]]; then
-            backup_path "$dest" "$BACKUP/.config"
-        elif [[ -L "$dest" ]]; then
-            rm -f "$dest"
-        fi
-
-        ln -s "$source" "$dest"
-        info "Linked $dest → $source"
+        install_path \
+            "$SRC/$file" \
+            "$HOME/.config/$file" \
+            "$BACKUP/.config"
     done
 }
 
 # ─────────────────────────────────────────────
-# Symlink themes
+# Install themes
 # ─────────────────────────────────────────────
 
-link_themes() {
-    step "Symlinking themes into ~/.themes/"
+install_themes() {
+    if [[ "$USE_SYMLINKS" == true ]]; then
+        step "Installing themes as symlinks"
+    else
+        step "Installing themes normally"
+    fi
 
     mkdir -p "$HOME/.themes"
 
     for theme in "${THEMES[@]}"; do
-        local source="$THEMES_SRC/$theme"
-        local dest="$HOME/.themes/$theme"
-
-        if [[ ! -d "$source" ]]; then
-            warn "$source not found; skipping."
-            continue
-        fi
-
-        if [[ -e "$dest" && ! -L "$dest" ]]; then
-            backup_path "$dest" "$BACKUP/.themes"
-        elif [[ -L "$dest" ]]; then
-            rm -f "$dest"
-        fi
-
-        ln -s "$source" "$dest"
-        info "Linked $dest → $source"
+        install_path \
+            "$THEMES_SRC/$theme" \
+            "$HOME/.themes/$theme" \
+            "$BACKUP/.themes"
     done
 }
 
@@ -380,6 +390,12 @@ link_themes() {
 # ─────────────────────────────────────────────
 
 info "Detected distro: $DISTRO"
+
+if [[ "$USE_SYMLINKS" == true ]]; then
+    info "Installation mode: symlinks"
+else
+    info "Installation mode: normal copies"
+fi
 
 if [[ "$SKIP_DEPS" == false ]]; then
     if ! install_deps; then
@@ -390,14 +406,20 @@ else
     warn "Skipping dependency installation (--no-deps)."
 fi
 
-link_configs
-link_themes
+install_configs
+install_themes
 
 echo
-info "Done!"
+info "Installation complete."
 
 if [[ -d "$BACKUP" ]]; then
     warn "Backups saved to: $BACKUP"
+fi
+
+if [[ "$USE_SYMLINKS" == true ]]; then
+    info "Configs were installed as symlinks."
+else
+    info "Configs were installed as normal copies."
 fi
 
 info "Log out and back in, or restart Hyprland, to apply changes."
