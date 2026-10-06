@@ -92,7 +92,7 @@ if you like to use symlink instead, run:
 ./install.sh --symlink
 ```
 
-> **Note:** you can run ./install.sh --symlink --no-deps to install the config files 
+> **Note:** you can run ./install.sh --symlinks --no-deps to install the config files 
 > without installing any dependencies
 
 The script will:
