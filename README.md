@@ -91,6 +91,7 @@ if you like to use symlink instead, run:
 ```bash
 ./install.sh --symlink
 
+#install symlink files without installing
 ./install.sh --symlink --no-deps
 ```
 
