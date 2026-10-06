@@ -48,7 +48,6 @@ PACMAN_PKGS=(
     swaync
     paru
     rofi-wayland
-    fuzzel
     kitty
     fish
     starship
