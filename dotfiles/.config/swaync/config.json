@@ -60,7 +60,7 @@
         {
           "label": "󰍛",
           "tooltip": "System Monitor",
-          "command": "alacratty -e btop",
+          "command": "alacritty -e btop",
           "update-command": "~/.config/swaync/scripts/sysmon.sh"
         },
         {

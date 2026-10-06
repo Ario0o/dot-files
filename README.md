@@ -120,7 +120,7 @@ sudo pacman -S --needed --noconfirm \
     hyprland swaync \
     rofi-wayland \
     kitty fish starship \
-    awww pamixer alacratty\
+    awww pamixer alacritty\
     thunar thunar-volman gvfs gthumb \
     network-manager-applet brightnessctl playerctl \
     grim slurp wl-clipboard cliphist \
