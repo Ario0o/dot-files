@@ -94,6 +94,7 @@ CONFIGS=(
     fish
     fuzzel
     gtk-3.0
+    gtk-4.0
     hypr
     kitty
     rofi
@@ -214,7 +215,7 @@ install_arch() {
     local aur_to_install=()
     local aur_helper=""
 
-    # Update the entire system first
+    # Update system
     step "Updating the system"
 
     if ! sudo pacman -Syu; then
@@ -249,8 +250,7 @@ install_arch() {
         fi
     fi
 
-    # Detect AUR helper after installing official packages.
-    # This allows paru from PACMAN_PKGS to become available.
+    # Detect AUR helper
     if command -v paru >/dev/null 2>&1; then
         aur_helper="paru"
     elif command -v yay >/dev/null 2>&1; then
