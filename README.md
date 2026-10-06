@@ -86,10 +86,10 @@ If you prefer to only install the configuration files without installing any dep
 ```bash
 ./install.sh --no-deps
 ```
-if you like to use symlinks instead, run:
+if you like to use symlink instead, run:
 
 ```bash
-./install.sh --symlinks
+./install.sh --symlink
 ```
 
 > **Note:** you can run ./install.sh --symlinks --no-deps to install the config files 
