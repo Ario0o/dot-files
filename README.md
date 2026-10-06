@@ -91,9 +91,9 @@ if you like to use symlink instead, run:
 ```bash
 ./install.sh --symlink
 ```
-
-> **Note:** you can run ./install.sh --symlinks --no-deps to install the config files 
-> without installing any dependencies
+```bash
+./install.sh --symlink --no-deps
+```
 
 The script will:
 - Detect your distribution (auto-install supported for Arch/CachyOS).
@@ -107,7 +107,7 @@ if you want to update your config to a newer verion, run:
 ```bash
 ./update_config.sh
 ```
-if you installed the symlink version, run:
+if you are using the symlink version, run:
 
 ```bash
 ./update_config.sh --symlink
