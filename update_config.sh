@@ -84,12 +84,6 @@ if ! git pull --ff-only; then
     exit 1
 fi
 
-if command -v pacman >/dev/null 2>&1; then
-    step "Updating system packages"
-    sudo pacman -Syu --needed
-fi
-
-
 INSTALL_ARGS=()
 
 if [[ "$USE_SYMLINKS" == true ]]; then
