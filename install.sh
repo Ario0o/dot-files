@@ -92,7 +92,6 @@ AUR_PKGS=(
 CONFIGS=(
     cava
     fish
-    fuzzel
     gtk-3.0
     gtk-4.0
     hypr
@@ -319,19 +318,17 @@ install_path() {
 
     mkdir -p "$(dirname "$destination")"
 
-    # Back up existing regular files/directories.
-    # Remove existing symlinks without backing them up.
-    if [[ -e "$destination" && ! -L "$destination" ]]; then
-        backup_path "$destination" "$backup_dir"
-    elif [[ -L "$destination" ]]; then
+    if [[ -L "$destination" ]]; then
         rm -f "$destination"
+    elif [[ -e "$destination" ]]; then
+        backup_path "$destination" "$backup_dir"
     fi
 
     if [[ "$USE_SYMLINKS" == true ]]; then
-        ln -s "$source" "$destination"
+        ln -sfnT "$source" "$destination"
         info "Linked $destination → $source"
     else
-        cp -a "$source" "$destination"
+        cp -aT "$source" "$destination"
         info "Copied $source → $destination"
     fi
 }
