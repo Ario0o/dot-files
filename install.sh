@@ -81,6 +81,7 @@ PACMAN_PKGS=(
     noto-fonts
     noto-fonts-emoji
     vim
+    alacratty
 )
 
 AUR_PKGS=(
