@@ -118,7 +118,7 @@ if you installed the symlink version, run:
 ```bash
 sudo pacman -S --needed --noconfirm \
     hyprland swaync \
-    rofi-wayland fuzzel \
+    rofi-wayland \
     kitty fish starship \
     awww pamixer alacratty\
     thunar thunar-volman gvfs gthumb \
