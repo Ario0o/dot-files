@@ -109,7 +109,7 @@ if you want to update your config to a newer verion, run:
 if you installed the symlink version, run:
 
 ```bash
-./update_config.sh ----symlink
+./update_config.sh --symlink
 ```
 
 ## install dependencys sepearatly 
