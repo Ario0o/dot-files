@@ -27,7 +27,6 @@ Thumbs.db
 *.pid
 *.lock
 dotfiles/.config/fish/fish_variables
-.vscode/
 .idea/
 backup/
 backups/
