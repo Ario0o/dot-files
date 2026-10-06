@@ -50,10 +50,7 @@
         {
           "label": "󰂯",
           "tooltip": "Toggle Bluetooth",
-          "type": "toggle",
-          "active": true,
-          "command": "sh -c '[[ $SWAYNC_TOGGLE_STATE == true ]] && bluetoothctl power on || bluetoothctl power off'",
-          "update-command": "sh -c '[[ $(bluetoothctl show | grep \"Powered: yes\") ]] && echo true || echo false'"
+          "command": "wifi-manager --toggle"
         },
         {
           "label": "󱣵",
