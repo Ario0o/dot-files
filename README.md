@@ -117,7 +117,7 @@ if you are using the symlink version, run:
 
 ```bash
 sudo pacman -S --needed --noconfirm \
-    hyprland swaync \
+    hyprland swaync uwsm\
     rofi-wayland \
     kitty fish starship \
     awww pamixer alacritty\

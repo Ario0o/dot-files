@@ -47,6 +47,7 @@ PACMAN_PKGS=(
     hyprland
     swaync
     paru
+    uwsm
     rofi-wayland
     kitty
     fish
