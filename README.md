@@ -133,7 +133,6 @@ sudo pacman -S --needed --noconfirm \
 
 ```bash
 paru -S --needed \
-    vscodium-bin \
     waybar-cava-git \
     otf-geist-mono-nerd \
     waypaper
