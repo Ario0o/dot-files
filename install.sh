@@ -54,7 +54,7 @@ PACMAN_PKGS=(
     starship
     awww
     thunar
-    floorp
+    vivaldi
     thunar-volman
     gvfs
     gthumb

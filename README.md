@@ -61,11 +61,11 @@ My personal Hyprland setup on CachyOS.
 - VScodium
 - Starship
 - Cava
-- thunar
+- Thunar
 - awww
-- waypaper
-- wifi manager
-- floorp browser
+- Waypaper
+- Wifi manager
+- Vivaldi
 - vim
 
 Install on Arch/CachyOS:
@@ -124,7 +124,7 @@ sudo pacman -S --needed --noconfirm \
     network-manager-applet brightnessctl playerctl \
     grim slurp wl-clipboard cliphist \
     pipewire pipewire-pulse wireplumber pavucontrol \
-    bluez bluez-utils blueman floorp \
+    bluez bluez-utils blueman vivaldi \
     polkit-kde-agent xdg-desktop-portal-hyprland \
     qt5-wayland qt6-wayland \
     ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji \
