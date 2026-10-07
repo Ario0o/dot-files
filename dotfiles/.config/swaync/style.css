@@ -1,6 +1,6 @@
 
 /* ==============================================
-   Gruvbox Material Dark (Soft) Palette
+   Gruvbox Material Dark
    ============================================== */
 
 @define-color bg0 #32302f;
@@ -110,7 +110,7 @@
 }
 
 /* ==============================================
-   Buttons Grid (Wi-Fi, Bluetooth, etc.)
+   Buttons Grid
    ============================================== */
 .widget-buttons-grid {
   margin: 8px;
@@ -138,7 +138,7 @@
   border-color: @yellow;
 }
 
-/* Active toggle state (e.g., Wi-Fi On, Bluetooth On, Muted) */
+/* Active toggle state */
 .widget-buttons-grid button.active {
   background: @green;
   color: @bg0;
