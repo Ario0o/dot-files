@@ -55,18 +55,17 @@ My personal Hyprland setup on CachyOS.
 - Hyprland
 - Waybar
 - SwayNC
+- Fish shell
 - Rofi
 - Kitty
 - VScodium
-- Fish shell
 - Starship
 - Cava
 - thunar
 - awww
 - waypaper
 - wifi manager
-- helium
-- paru
+- floorp browser
 - vim
 
 Install on Arch/CachyOS:
@@ -125,7 +124,7 @@ sudo pacman -S --needed --noconfirm \
     network-manager-applet brightnessctl playerctl \
     grim slurp wl-clipboard cliphist \
     pipewire pipewire-pulse wireplumber pavucontrol \
-    bluez bluez-utils blueman \
+    bluez bluez-utils blueman floorp \
     polkit-kde-agent xdg-desktop-portal-hyprland \
     qt5-wayland qt6-wayland \
     ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji \
@@ -135,7 +134,6 @@ sudo pacman -S --needed --noconfirm \
 ```bash
 paru -S --needed \
     vscodium-bin \
-    helium-browser-bin \
     waybar-cava-git \
     otf-geist-mono-nerd \
     waypaper

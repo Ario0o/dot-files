@@ -54,6 +54,7 @@ PACMAN_PKGS=(
     starship
     awww
     thunar
+    floorp
     thunar-volman
     gvfs
     gthumb
@@ -85,7 +86,6 @@ PACMAN_PKGS=(
 )
 
 AUR_PKGS=(
-    helium-browser-bin
     waybar-cava-git
     otf-geist-mono-nerd
     waypaper

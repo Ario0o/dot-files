@@ -5,7 +5,7 @@ local mainMod = "SUPER"
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd("kitty"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("thunar"))
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("/home/aria/.config/rofi/type-2/launcher.sh"))
-hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("helium-browser"))
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("floorp"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("codium"))
 
 hl.bind(mainMod .. " + Tab", hl.dsp.focus({ workspace = "m+1" }))
