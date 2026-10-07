@@ -57,7 +57,7 @@ My personal Hyprland setup on CachyOS.
 - SwayNC
 - Rofi
 - Kitty
-- VS codium
+- VScodium
 - Fish shell
 - Starship
 - Cava
@@ -102,7 +102,7 @@ backing up anything it overwrites to `~/.dotfiles-backup-<timestamp>`.
 
 ## update config
 
-if you want to update your config to a newer verion, run:
+if you want to update your config to a newer version, run:
 
 ```bash
 ./update_config.sh
