@@ -18,7 +18,6 @@ id_ed25519.pub
 *.swo
 *~
 .#*
-.DS_Store
 Thumbs.db
 .directory
 .cache/
@@ -26,7 +25,6 @@ Thumbs.db
 **/.cache/
 *.pid
 *.lock
-dotfiles/.config/fish/fish_variables
 .idea/
 backup/
 backups/
