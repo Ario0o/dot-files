@@ -54,8 +54,10 @@ PACMAN_PKGS=(
     starship
     awww
     thunar
+    thunar-archive-plugin
     vivaldi
     thunar-volman
+    file-roller
     gvfs
     gthumb
     brightnessctl
@@ -79,7 +81,9 @@ PACMAN_PKGS=(
     ttf-jetbrains-mono-nerd
     noto-fonts
     noto-fonts-emoji
+    papirus-icon-theme
     vim
+    flat-remix-gtk
     alacritty
     polkit-gnome
     qt6ct
@@ -87,6 +91,7 @@ PACMAN_PKGS=(
     batsignal
     hyprpicker
     hyprlock
+    imagemagick
 )
 
 AUR_PKGS=(
