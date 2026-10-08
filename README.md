@@ -132,10 +132,10 @@ sudo pacman -S --needed --noconfirm \
     qt5-wayland qt6-wayland \
     ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji \
     vscodium paru vim \
-    hyprlock hyprpicker batsignal |
+    hyprlock hyprpicker batsignal \
     btop qt6ct polkit-gnome xdg-desktop-portal-gnome
     flat-remix-gtk-4.0 image Magick file-roller \
-     papirus-icon-theme
+    papirus-icon-theme
 ```
 
 ```bash
