@@ -29,3 +29,5 @@ Thumbs.db
 backup/
 backups/
 *.backup
+
+dotfiles/.config/fish/fish_variables
