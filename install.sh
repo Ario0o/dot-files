@@ -370,6 +370,12 @@ install_configs() {
             "$HOME/.config/$file" \
             "$BACKUP/.config"
     done
+
+        local scripts_dir="$HOME/.config/hypr/scripts"
+    if compgen -G "$scripts_dir/*.sh" >/dev/null; then
+        chmod +x "$scripts_dir/"*.sh
+    fi
+
 }
 
 # ─────────────────────────────────────────────
