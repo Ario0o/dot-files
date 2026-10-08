@@ -134,7 +134,7 @@ sudo pacman -S --needed --noconfirm \
     vscodium paru vim \
     hyprlock hyprpicker batsignal \
     btop qt6ct polkit-gnome xdg-desktop-portal-gnome
-    flat-remix-gtk-4.0 image Magick file-roller \
+    flat-remix-gtk-4.0 imagemagick file-roller \
     papirus-icon-theme
 ```
 
