@@ -397,7 +397,15 @@ install_themes() {
             "$HOME/.themes/$theme" \
             "$BACKUP/.themes"
     done
+
+    if command -v gsettings >/dev/null 2>&1; then
+        gsettings set org.gnome.desktop.interface gtk-theme "Gruvbox-Material-Dark"
+        gsettings set org.gnome.desktop.interface icon-theme "Papirus"
+    else
+        warn "gsettings not found; skipping GTK theme settings."
+    fi
 }
+
 
 # ─────────────────────────────────────────────
 # Main
