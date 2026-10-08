@@ -55,6 +55,8 @@ My personal Hyprland setup on CachyOS.
 - Hyprland
 - Waybar
 - SwayNC
+- Hyprlock
+- Hyprpicker
 - Fish shell
 - Rofi
 - Kitty
@@ -65,7 +67,7 @@ My personal Hyprland setup on CachyOS.
 - awww
 - Waypaper
 - Wifi manager
-- Vivaldi
+- Vivaldi browser 
 - vim
 
 Install on Arch/CachyOS:
