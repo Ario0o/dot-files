@@ -6,9 +6,9 @@ My personal Hyprland setup on CachyOS.
 
 ![Desktop](screenshots/screenshot.png)
 
-![Terminal](screenshots/screenshot-2.png)
+![Swqync](screenshots/screenshot-2.png)
 
-![Launcher](screenshots/screenshot-3.png)
+![Rofi](screenshots/screenshot-3.png)
 
 ## What's Inside
 
@@ -99,7 +99,7 @@ if you like to use symlink instead, run:
 
 The script will:
 - Detect your distribution (auto-install supported for Arch/CachyOS).
-- The script install configs into `~/.config/` and themes into `~/.themes/`,
+- The script will install the configs into `~/.config/` and themes into `~/.themes/`,
 backing up anything it overwrites to `~/.dotfiles-backup-<timestamp>`.
 
 ## update config
