@@ -104,7 +104,7 @@ backing up anything it overwrites to `~/.dotfiles-backup-<timestamp>`.
 
 ## update config
 
-if you want to update your config to a newer version, run:
+if you want to update your dots and  config to a newer version, run:
 
 ```bash
 ./update_config.sh
