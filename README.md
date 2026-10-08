@@ -64,6 +64,7 @@ My personal Hyprland setup on CachyOS.
 - Starship
 - Cava
 - Thunar
+- Btop
 - awww
 - Waypaper
 - Wifi manager
