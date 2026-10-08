@@ -93,7 +93,7 @@ if you like to use symlink instead, run:
 ```bash
 ./install.sh --symlink
 
-#install symlink files without installing dependencies
+#install symlink files without installing dependencys
 ./install.sh --symlink --no-deps
 ```
 
