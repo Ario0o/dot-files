@@ -58,7 +58,6 @@ PACMAN_PKGS=(
     thunar-volman
     gvfs
     gthumb
-    network-manager-applet
     brightnessctl
     playerctl
     grim
@@ -72,9 +71,7 @@ PACMAN_PKGS=(
     pamixer
     bluez
     bluez-utils
-    blueman
     vscodium
-    polkit-kde-agent
     xdg-desktop-portal-hyprland
     qt5-wayland
     qt6-wayland
@@ -83,6 +80,12 @@ PACMAN_PKGS=(
     noto-fonts-emoji
     vim
     alacritty
+    polkit-gnome
+    qt6ct
+    btop
+    batsignal
+    hyprpicker
+    hyprlock
 )
 
 AUR_PKGS=(

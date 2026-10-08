@@ -121,14 +121,16 @@ sudo pacman -S --needed --noconfirm \
     kitty fish starship \
     awww pamixer alacritty\
     thunar thunar-volman gvfs gthumb \
-    network-manager-applet brightnessctl playerctl \
+    brightnessctl playerctl \
     grim slurp wl-clipboard cliphist \
     pipewire pipewire-pulse wireplumber pavucontrol \
-    bluez bluez-utils blueman vivaldi \
-    polkit-kde-agent xdg-desktop-portal-hyprland \
+    bluez bluez-utils vivaldi \
+    xdg-desktop-portal-hyprland \
     qt5-wayland qt6-wayland \
     ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji \
-    vscodium paru vim
+    vscodium paru vim \
+    hyprlock hyprpicker batsignal \
+    btop qt6ct polkit-gnome
 ```
 
 ```bash
