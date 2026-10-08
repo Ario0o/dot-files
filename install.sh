@@ -73,6 +73,7 @@ PACMAN_PKGS=(
     bluez-utils
     vscodium
     xdg-desktop-portal-hyprland
+    xdg-desktop-portal-gnome
     qt5-wayland
     qt6-wayland
     ttf-jetbrains-mono-nerd

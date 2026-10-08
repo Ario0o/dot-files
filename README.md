@@ -130,7 +130,7 @@ sudo pacman -S --needed --noconfirm \
     ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji \
     vscodium paru vim \
     hyprlock hyprpicker batsignal \
-    btop qt6ct polkit-gnome
+    btop qt6ct polkit-gnome xdg-desktop-portal-gnome
 ```
 
 ```bash
