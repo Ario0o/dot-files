@@ -53,13 +53,15 @@ PACMAN_PKGS=(
     fish
     starship
     awww
+    cava
     thunar
     thunar-archive-plugin
-    vivaldi
     thunar-volman
     file-roller
     gvfs
     gthumb
+    vivaldi
+    cava
     brightnessctl
     playerctl
     grim
