@@ -115,6 +115,30 @@ if you are using symlink, run:
 ./update_config.sh --symlink
 ```
 
+## Structure 
+
+```bash
+.
+├── dotfiles/
+│   ├── hypr/
+│   ├── waybar/
+│   ├── swaync/
+│   ├── rofi/
+│   ├── kitty/
+│   ├── fish/
+│   ├── starship/
+│   ├── cava/
+│   ├── wifi-manager/
+│   ├── GTK-3.0/
+│   ├── GTK-4.0/
+│   └── Gruvbox-Material-Dark/
+├── screenshots/
+├── install.sh
+├── update_config.sh
+├── README.md
+├── LICENSE
+└── .gitignore
+```
 ## install dependencys sepearatly 
 
 ```bash
