@@ -109,7 +109,7 @@ if you want to update your dots and  config to a newer version, run:
 ```bash
 ./update_config.sh
 ```
-if you are using the symlink version, run:
+if you are using symlink, run:
 
 ```bash
 ./update_config.sh --symlink
