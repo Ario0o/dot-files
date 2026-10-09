@@ -124,14 +124,14 @@ sudo pacman -S --needed --noconfirm \
     kitty fish starship \
     awww pamixer alacritty\
     thunar thunar-volman gvfs gthumb \
-    brightnessctl playerctl \
+    brightnessctl playerctl cava \
     grim slurp wl-clipboard cliphist \
     pipewire pipewire-pulse wireplumber pavucontrol \
     bluez bluez-utils vivaldi \
     xdg-desktop-portal-hyprland \
     qt5-wayland qt6-wayland \
     ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji \
-    vscodium paru vim \
+    vscodium vim \
     hyprlock hyprpicker batsignal \
     btop qt6ct polkit-gnome xdg-desktop-portal-gnome \
     flat-remix-gtk-4.0 imagemagick file-roller \
