@@ -46,14 +46,12 @@ BACKUP="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 PACMAN_PKGS=(
     hyprland
     swaync
-    paru
     uwsm
     rofi-wayland
     kitty
     fish
     starship
     awww
-    cava
     thunar
     thunar-archive-plugin
     thunar-volman
@@ -85,7 +83,6 @@ PACMAN_PKGS=(
     noto-fonts-emoji
     papirus-icon-theme
     vim
-    flat-remix-gtk
     alacritty
     polkit-gnome
     qt6ct
@@ -175,6 +172,7 @@ fi
 # Prompt helper
 # ─────────────────────────────────────────────
 
+
 confirm() {
     local prompt="$1"
     local reply
@@ -185,22 +183,6 @@ confirm() {
 
     [[ "$reply" =~ ^[Yy]?$ ]]
 }
-
-# ─────────────────────────────────────────────
-# Distro detection
-# ─────────────────────────────────────────────
-
-detect_distro() {
-    if [[ -f /etc/os-release ]]; then
-        # shellcheck disable=SC1091
-        source /etc/os-release
-        echo "${ID:-unknown}"
-    else
-        echo "unknown"
-    fi
-}
-
-DISTRO="$(detect_distro)"
 
 # ─────────────────────────────────────────────
 # Package installation
@@ -303,6 +285,54 @@ install_arch() {
 }
 
 # ─────────────────────────────────────────────
+# Set fish as shell
+# ─────────────────────────────────────────────
+
+set_fish_default() {
+    local fish_path
+
+    if ! fish_path="$(command -v fish)"; then
+        warn "Fish isn't installed; skipping default-shell change."
+        return 0
+    fi
+
+    if ! grep -Fxq "$fish_path" /etc/shells; then
+        warn "$fish_path isn't listed in /etc/shells; skipping default-shell change."
+        return 0
+    fi
+
+    if confirm "Set Fish as your default login shell?"; then
+        if chsh -s "$fish_path"; then
+            info "Fish set as your default login shell. Log out and back in for it to take effect."
+        else
+            warn "Could not change the default shell."
+        fi
+    else
+        info "Leaving your current default shell unchanged."
+    fi
+}
+
+# ─────────────────────────────────────────────
+# Distro detection
+# ─────────────────────────────────────────────
+
+detect_distro() {
+    if [[ -f /etc/os-release ]]; then
+        # shellcheck disable=SC1091
+        source /etc/os-release
+        echo "${ID:-unknown}"
+    else
+        echo "unknown"
+    fi
+}
+
+DISTRO="$(detect_distro)"
+
+if [[ "$DISTRO" == "cachyos" ]]; then
+    PACMAN_PKGS+=(paru)
+fi
+
+# ─────────────────────────────────────────────
 # Backup helper
 # ─────────────────────────────────────────────
 
@@ -400,15 +430,19 @@ install_themes() {
             "$BACKUP/.themes"
     done
 
-    if command -v gsettings >/dev/null 2>&1; then
-        gsettings set org.gnome.desktop.interface gtk-theme "Gruvbox-Material-Dark"
-        gsettings set org.gnome.desktop.interface icon-theme "Papirus"
-    else
-        warn "gsettings not found; skipping GTK theme settings."
+if command -v gsettings >/dev/null 2>&1; then
+    if ! gsettings set org.gnome.desktop.interface gtk-theme "Gruvbox-Material-Dark"; then
+        warn "Could not set GTK theme."
     fi
-}
 
+    if ! gsettings set org.gnome.desktop.interface icon-theme "Papirus"; then
+        warn "Could not set icon theme."
+    fi
+else
+    warn "gsettings not found; skipping GTK theme settings."
+fi
 
+} 
 # ─────────────────────────────────────────────
 # Main
 # ─────────────────────────────────────────────
@@ -432,6 +466,7 @@ fi
 
 install_configs
 install_themes
+set_fish_default
 
 echo
 info "Installation complete."
