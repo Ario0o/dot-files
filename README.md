@@ -66,7 +66,6 @@ My personal Hyprland setup on CachyOS.
 - Thunar
 - Btop
 - awww
-- Waypaper
 - Wifi manager
 - Vivaldi browser 
 - vim
@@ -166,7 +165,6 @@ sudo pacman -S --needed --noconfirm \
 paru -S --needed \
     waybar-cava-git \
     otf-geist-mono-nerd \
-    waypaper
 ```
 ## Credits 
 Originally based on

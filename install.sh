@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# install.sh - Install Hyprland dotfiles and dependencies
 
 set -Eeuo pipefail
 
@@ -96,7 +95,6 @@ PACMAN_PKGS=(
 AUR_PKGS=(
     waybar-cava-git
     otf-geist-mono-nerd
-    waypaper
 )
 
 CONFIGS=(
