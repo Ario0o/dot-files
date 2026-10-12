@@ -1,14 +1,11 @@
-/* ~/.config/rofi/wallpaper-picker.rasi */
-
 * {
-    /* Gruvbox Material Dark Palette */
     bg0: #282828;
     bg1: #3c3836;
     bg2: #504945;
     fg0: #ddc7a1;
     fg1: #d4be98;
-    accent: #a9b665; /* Green */
-    red: #ea6962;    /* Red (used for selection border) */
+    accent: #a9b665;
+    red: #ea6962;
     
     /* Font settings */
     font: "JetBrainsMono Nerd Font 10";
@@ -16,16 +13,15 @@
 
 configuration {
     show-icons: true;
-    icon-size: 12em; /* Adjusted size to fit better */
+    icon-size: 12em;
     display-drun: "";
     drun-display-format: "{icon}";
     disable-history: true;
 }
 
-/* Main Window */
 window {
     width: 80%;
-    height: 55%; /* Reduced height so it doesn't stretch */
+    height: 55%;
     background-color: @bg0;
     border: 2px solid;
     border-color: @accent;
@@ -33,18 +29,16 @@ window {
     padding: 20px;
 }
 
-/* Force the main box to be dark */
 mainbox {
     children: [ listview ];
     background-color: @bg0;
 }
 
-/* The grid of images */
 listview {
     columns: 4;       
-    lines: 3;         
+    lines: 5;
     spacing: 15px;    
-    background-color: @bg0; /* Forces the grid background to be dark */
+    background-color: @bg0; 
     scrollbar: false;
 }
 
@@ -63,7 +57,6 @@ element-icon {
     background-color: transparent;
 }
 
-/* Completely disable text so it doesn't create white space */
 element-text {
     enabled: false;
 }
