@@ -1,68 +1,126 @@
 * {
-    bg0: #282828;
-    bg1: #3c3836;
-    bg2: #504945;
-    fg0: #ddc7a1;
-    fg1: #d4be98;
-    accent: #a9b665;
-    red: #ea6962;
-    
-    /* Font settings */
-    font: "JetBrainsMono Nerd Font 10";
+    font: "JetBrainsMono Nerd Font 11";
+
+    background-color: transparent;
+
+    text-color: #d4be98;
 }
 
-configuration {
-    show-icons: true;
-    icon-size: 12em;
-    display-drun: "";
-    drun-display-format: "{icon}";
-    disable-history: true;
-}
+/* ── Window ────────────────────────────────── */
 
 window {
-    width: 80%;
-    height: 55%;
-    background-color: @bg0;
-    border: 2px solid;
-    border-color: @accent;
-    border-radius: 12px;
-    padding: 20px;
+    width: 99%;
+    height: 99%;
+
+    location: center;
+    anchor: center;
+
+    border: 0;
+    border-radius: 24px;
+
+    padding: 18px;
+
+    background-color: #282828;
 }
+
+/* ── Main Layout ───────────────────────────── */
 
 mainbox {
-    children: [ listview ];
-    background-color: @bg0;
+    spacing: 16px;
+
+    children: [ inputbar, listview ];
 }
+
+/* ── Search Bar ────────────────────────────── */
+
+inputbar {
+    padding: 12px 18px;
+
+    spacing: 12px;
+
+    border-radius: 100px;
+
+    background-color: #32302f;
+
+    children: [ prompt, entry ];
+}
+
+prompt {
+    enabled: true;
+
+    content: "";
+
+    font: "JetBrainsMono Nerd Font 12";
+
+    text-color: #a89984;
+
+    margin: 0px 4px 0px 0px;
+}
+
+entry {
+    placeholder: "Search wallpaper...";
+
+    placeholder-color: #a89984;
+
+    text-color: #d4be98;
+
+    background-color: transparent;
+}
+
+/* ── Wallpaper Grid ────────────────────────── */
 
 listview {
-    columns: 4;       
-    lines: 5;
-    spacing: 15px;    
-    background-color: @bg0; 
+    columns: 7;
+    lines: 2;
+
+    flow: horizontal;
+
+    fixed-height: true;
+    fixed-columns: true;
+
+    cycle: false;
+
     scrollbar: false;
+
+    spacing: 16px;
 }
+
+/* ── Wallpaper Cards ───────────────────────── */
 
 element {
-    padding: 8px; 
-    background-color: transparent;
-    border-radius: 8px;
     orientation: vertical;
-    spacing: 5px;
+
+    padding: 10px;
+
+    spacing: 10px;
+
+    border-radius: 18px;
 }
+
+/* ── Selected Wallpaper ────────────────────── */
+
+element selected.normal {
+    background-color: #504945;
+
+    border-radius: 18px;
+}
+
+/* ── Preview Image ─────────────────────────── */
 
 element-icon {
-    size: 12em;
+    size: 170px;
+
+    border-radius: 14px;
+
     horizontal-align: 0.5;
+
     vertical-align: 0.5;
-    background-color: transparent;
 }
+
+/* ── Wallpaper Name ────────────────────────── */
 
 element-text {
-    enabled: false;
-}
+    horizontal-align: 0.5;
 
-element selected {
-    background-color: @bg2;
-    border: 2px solid;
-    border-color: @red;
+    text-color: #d4be98;
 }

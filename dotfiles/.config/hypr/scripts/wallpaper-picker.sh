@@ -1,24 +1,28 @@
 #!/bin/bash
 
-WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
-ROFI_THEME="~/.config/rofi/wallpaper-picker.rasi"
-TRANSITION_FPS=60
+WALL_DIR="$HOME/Pictures/Wallpapers"
 
-if pgrep -x "rofi" > /dev/null; then
-    hyprctl notify 3 2500 "rgb(C62E2E)" "fontsize:35 Rofi is already open"
-    exit 1
+if ! pidof awww-daemon >/dev/null; then
+    awww-daemon &
+    sleep 0.5
 fi
 
-list=""
-for img in "$WALLPAPER_DIR"/*.{jpg,jpeg,png,gif,webp}; do
-    [ -e "$img" ] || continue
-    filename=$(basename "$img")
-    list+="$filename\x00icon\x1f$img\n"
-done
+SELECTED=$(
+	find "$WALL_DIR" -type f | while read -r img; do
+ 	[[ "$img" =~ \.(jpg|jpeg|png|webp|JPG|PNG)$ ]] || continue
 
-selected=$(echo -e "$list" | rofi -dmenu -i -show-icons -theme "$ROFI_THEME" -p "Wallpaper")
+        REL_PATH="${img#$WALL_DIR/}"
+	printf "%s\0icon\x1f%s\n" "$REL_PATH" "$img"
+    done | rofi \
+        -dmenu \
+        -i \
+        -show-icons \
+        -theme ~/.config/rofi/wallpaper-picker.rasi \
+        -p ""
+)
 
-if [ -n "$selected" ]; then
-    wallpaper_path="$WALLPAPER_DIR/$selected"
-    awww img "$wallpaper_path" --transition-fps "$TRANSITION_FPS" --transition-type any --transition-duration 1
+if [ -n "$SELECTED" ]; then
+    awww img "$WALL_DIR/$SELECTED" \
+        --transition-type wipe \
+        --transition-duration 1
 fi
