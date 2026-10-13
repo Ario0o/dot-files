@@ -197,7 +197,7 @@ sudo zypper addrepo -f \
 sudo zypper --gpg-auto-import-keys refresh
 
 sudo zypper install -y --no-recommends \
-    hyprland hyprlock hyprpicker hypridle swaync uwsm \
+    hyprland hyprlock hyprpicker swaync uwsm \
     rofi-wayland kitty fish starship awww \
     thunar thunar-plugin-archive thunar-volman file-roller gvfs gthumb \
     cava brightnessctl playerctl grim slurp wl-clipboard \

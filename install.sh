@@ -104,7 +104,6 @@ ZYPPER_PKGS=(
     hyprland
     hyprlock
     hyprpicker
-    hypridle
     swaync
     uwsm
     rofi-wayland
