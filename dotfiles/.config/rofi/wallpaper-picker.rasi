@@ -6,8 +6,6 @@
     text-color: #d4be98;
 }
 
-/* ── Window ────────────────────────────────── */
-
 window {
     width: 99%;
     height: 99%;
@@ -23,15 +21,11 @@ window {
     background-color: #282828;
 }
 
-/* ── Main Layout ───────────────────────────── */
-
 mainbox {
     spacing: 16px;
 
     children: [ inputbar, listview ];
 }
-
-/* ── Search Bar ────────────────────────────── */
 
 inputbar {
     padding: 12px 18px;
@@ -67,8 +61,6 @@ entry {
     background-color: transparent;
 }
 
-/* ── Wallpaper Grid ────────────────────────── */
-
 listview {
     columns: 7;
     lines: 2;
@@ -85,8 +77,6 @@ listview {
     spacing: 16px;
 }
 
-/* ── Wallpaper Cards ───────────────────────── */
-
 element {
     orientation: vertical;
 
@@ -97,15 +87,11 @@ element {
     border-radius: 18px;
 }
 
-/* ── Selected Wallpaper ────────────────────── */
-
 element selected.normal {
     background-color: #504945;
 
     border-radius: 18px;
 }
-
-/* ── Preview Image ─────────────────────────── */
 
 element-icon {
     size: 170px;
@@ -116,8 +102,6 @@ element-icon {
 
     vertical-align: 0.5;
 }
-
-/* ── Wallpaper Name ────────────────────────── */
 
 element-text {
     horizontal-align: 0.5;

@@ -70,11 +70,11 @@ My personal Hyprland setup on CachyOS.
 - Vivaldi browser 
 - vim
 
-Install on Arch/CachyOS:
+Supported distros for auto-install: **Arch / CachyOS** and **openSUSE Tumbleweed**.
 
 ## Installation
 
-clone this repository and run the installation script.
+Clone this repository and run the installation script.
 
 ```bash
 git clone https://github.com/Ario0o/dot-files ~/dot-files
@@ -87,28 +87,46 @@ If you prefer to only install the configuration files without installing any dep
 ```bash
 ./install.sh --no-deps
 ```
-if you like to use symlink instead, run:
+
+If you'd like to use symlinks instead, run:
 
 ```bash
 ./install.sh --symlink
 
-#install symlink files without installing dependencys
+# install symlink files without installing dependencies
 ./install.sh --symlink --no-deps
 ```
 
 The script will:
-- Detect your distribution (auto-install supported for Arch/CachyOS).
-- Install the configs into `~/.config/` and themes into `~/.themes/`,
-backing up anything it overwrites to `~/.dotfiles-backup-<timestamp>`.
+- Detect your distribution (auto-install supported for **Arch / CachyOS** and **openSUSE Tumbleweed**).
+- On openSUSE, add the **X11:Wayland** OBS repo automatically (and VSCodium/Vivaldi repos when needed).
+- Install configs into `~/.config/` and themes into `~/.themes/`, backing up anything it overwrites to `~/.dotfiles-backup-<timestamp>`.
+
+### Distro-specific notes
+
+**Arch / CachyOS** — uses `pacman` + `paru`/`yay` for AUR packages.
+
+**openSUSE Tumbleweed** — uses `zypper`. Some packages aren't in the official
+repos and are handled automatically:
+
+| Package | Source on openSUSE |
+|---|---|
+| VSCodium | OBS `home:kwk:vscodium` repo |
+| Vivaldi | Official Vivaldi RPM repo |
+| `cliphist` | Built from source (needs `go`) |
+| JetBrains Mono Nerd Font | Downloaded from Nerd Fonts releases |
+| Geist Mono Nerd Font | Downloaded from Nerd Fonts releases |
+| `waybar` | Uses the official openSUSE package (cava support included) |
 
 ## update config
 
-if you want to update your dots and  config to a newer version, run:
+If you want to update your dots and config to a newer version, run:
 
 ```bash
 ./update_config.sh
 ```
-if you are using symlink, run:
+
+If you are using symlinks, run:
 
 ```bash
 ./update_config.sh --symlink
@@ -138,14 +156,17 @@ if you are using symlink, run:
 ├── LICENSE
 └── .gitignore
 ```
-## install dependencys sepearatly 
+
+## install dependencies separately
+
+### Arch / CachyOS
 
 ```bash
 sudo pacman -S --needed --noconfirm \
-    hyprland swaync uwsm\
+    hyprland swaync uwsm \
     rofi-wayland \
     kitty fish starship \
-    awww pamixer alacritty\
+    awww pamixer alacritty \
     thunar thunar-volman gvfs gthumb \
     brightnessctl playerctl cava \
     grim slurp wl-clipboard cliphist \
@@ -164,8 +185,37 @@ sudo pacman -S --needed --noconfirm \
 ```bash
 paru -S --needed \
     waybar-cava-git \
-    otf-geist-mono-nerd \
+    otf-geist-mono-nerd
 ```
+
+### openSUSE Tumbleweed
+
+```bash
+sudo zypper addrepo -f \
+    https://download.opensuse.org/repositories/X11:Wayland/openSUSE_Tumbleweed/ \
+    X11_Wayland
+sudo zypper --gpg-auto-import-keys refresh
+
+sudo zypper install -y --no-recommends \
+    hyprland hyprlock hyprpicker hypridle swaync uwsm \
+    rofi-wayland kitty fish starship awww \
+    thunar thunar-plugin-archive thunar-volman file-roller gvfs gthumb \
+    cava brightnessctl playerctl grim slurp wl-clipboard \
+    pipewire pipewire-pulseaudio wireplumber pavucontrol pamixer \
+    bluez bluez-utils \
+    xdg-desktop-portal-hyprland xdg-desktop-portal-gnome \
+    libqt5-qtwayland qt6-wayland \
+    noto-sans-fonts noto-coloremoji-fonts papirus-icon-theme \
+    vim alacritty polkit-gnome qt6ct btop batsignal ImageMagick
+```
+
+Optional extras (installed automatically by `install.sh`):
+
+- **VSCodium** — OBS `home:kwk:vscodium`
+- **Vivaldi** — official Vivaldi RPM repo
+- **cliphist** — built from source (`sudo zypper install go`)
+- **JetBrains Mono / Geist Mono Nerd Fonts** — from Nerd Fonts releases
+
 ## Credits 
 Originally based on
 [babyanonymouse/Zero_Drag.dotfiles](https://github.com/babyanonymouse/Zero_Drag.dotfiles).
