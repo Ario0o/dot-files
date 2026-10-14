@@ -70,7 +70,7 @@ My personal Hyprland setup on CachyOS.
 - Vivaldi browser 
 - vim
 
-Supported distros for auto-install: **Arch / CachyOS** and **openSUSE Tumbleweed**.
+Supported distros for auto-install: **Arch / CachyOS** and **openSUSE Tumbleweed(beta)**.
 
 ## Installation
 
@@ -98,25 +98,9 @@ If you'd like to use symlinks instead, run:
 ```
 
 The script will:
-- Detect your distribution (auto-install supported for **Arch / CachyOS** and **openSUSE Tumbleweed**).
+- Detect your distribution (auto-install supported for **Arch / CachyOS** and **openSUSE Tumbleweed (bata)**).
 - On openSUSE, add the **X11:Wayland** OBS repo automatically (and VSCodium/Vivaldi repos when needed).
 - Install configs into `~/.config/` and themes into `~/.themes/`, backing up anything it overwrites to `~/.dotfiles-backup-<timestamp>`.
-
-### Distro-specific notes
-
-**Arch / CachyOS** — uses `pacman` + `paru`/`yay` for AUR packages.
-
-**openSUSE Tumbleweed** — uses `zypper`. Some packages aren't in the official
-repos and are handled automatically:
-
-| Package | Source on openSUSE |
-|---|---|
-| VSCodium | OBS `home:kwk:vscodium` repo |
-| Vivaldi | Official Vivaldi RPM repo |
-| `cliphist` | Built from source (needs `go`) |
-| JetBrains Mono Nerd Font | Downloaded from Nerd Fonts releases |
-| Geist Mono Nerd Font | Downloaded from Nerd Fonts releases |
-| `waybar` | Uses the official openSUSE package (cava support included) |
 
 ## update config
 
