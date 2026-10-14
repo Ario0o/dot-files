@@ -106,6 +106,7 @@ CONFIGS=(
     kitty
     rofi
     swaync
+    uwsm
     waybar
     wifi-manager
 )

@@ -22,6 +22,7 @@ My personal Hyprland setup on CachyOS.
 | `fish` | Shell |
 | `starship` | Shell prompt |
 | `cava` | Audio visualizer |
+| `uwsm` | Hyprland manager |
 | `wifi-manager` | Wi-Fi management (TUI/GUI) |
 | `GTK-3.0` | GTK config |
 | `GTK-4.0` | GTK config |
