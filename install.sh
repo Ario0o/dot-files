@@ -42,7 +42,6 @@ SRC="$DOTFILES/dotfiles/.config"
 THEMES_SRC="$DOTFILES/dotfiles/.themes"
 BACKUP="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 
-# ── Arch / CachyOS packages ──────────────────
 PACMAN_PKGS=(
     hyprland
     swaync
@@ -96,54 +95,6 @@ PACMAN_PKGS=(
 AUR_PKGS=(
     waybar-cava-git
     otf-geist-mono-nerd
-)
-
-# ── openSUSE Tumbleweed packages ─────────────
-# Packages available from official repos + X11:Wayland OBS repo.
-ZYPPER_PKGS=(
-    hyprland
-    hyprlock
-    hyprpicker
-    swaync
-    uwsm
-    rofi-wayland
-    kitty
-    fish
-    starship
-    awww
-    thunar
-    thunar-plugin-archive
-    thunar-volman
-    file-roller
-    gvfs
-    gthumb
-    cava
-    brightnessctl
-    playerctl
-    grim
-    slurp
-    wl-clipboard
-    pipewire
-    pipewire-pulseaudio
-    wireplumber
-    pavucontrol
-    pamixer
-    bluez
-    bluez-utils
-    xdg-desktop-portal-hyprland
-    xdg-desktop-portal-gnome
-    libqt5-qtwayland
-    qt6-wayland
-    noto-sans-fonts
-    noto-coloremoji-fonts
-    papirus-icon-theme
-    vim
-    alacritty
-    polkit-gnome
-    qt6ct
-    btop
-    batsignal
-    ImageMagick
 )
 
 CONFIGS=(
@@ -219,6 +170,7 @@ fi
 # Prompt helper
 # ─────────────────────────────────────────────
 
+
 confirm() {
     local prompt="$1"
     local reply
@@ -240,10 +192,6 @@ install_deps() {
     case "$DISTRO" in
         arch|cachyos|endeavouros|manjaro)
             install_arch
-            ;;
-
-        opensuse*|suse*|sles)
-            install_opensuse
             ;;
 
         *)
@@ -331,184 +279,6 @@ install_arch() {
         fi
     else
         warn "Skipping AUR package installation."
-    fi
-}
-
-# ─────────────────────────────────────────────
-# openSUSE Tumbleweed installation
-# ─────────────────────────────────────────────
-
-add_opensuse_repos() {
-    step "Ensuring required OBS repositories"
-
-    local alias_name="X11_Wayland"
-    local url="https://download.opensuse.org/repositories/X11:Wayland/openSUSE_Tumbleweed/"
-
-    if zypper lr 2>/dev/null | grep -q "$alias_name"; then
-        info "✓ OBS repo X11:Wayland already present"
-    else
-        info "Adding OBS repo X11:Wayland"
-        if ! sudo zypper addrepo -f "$url" "$alias_name"; then
-            warn "Could not add X11:Wayland repo."
-        fi
-    fi
-
-    sudo zypper --gpg-auto-import-keys refresh
-}
-
-install_opensuse() {
-    local to_install=()
-
-    add_opensuse_repos
-
-    step "Updating the system"
-    if ! sudo zypper --gpg-auto-import-keys dup -y; then
-        warn "System update (zypper dup) reported issues; continuing anyway."
-    fi
-
-    # Find missing packages
-    for pkg in "${ZYPPER_PKGS[@]}"; do
-        if rpm -q "$pkg" &>/dev/null; then
-            info "✓ $pkg already installed"
-        else
-            to_install+=("$pkg")
-        fi
-    done
-
-    if [[ ${#to_install[@]} -eq 0 ]]; then
-        info "All openSUSE repository packages are already installed."
-    else
-        echo
-        warn "The following packages will be installed via zypper:"
-        printf '  %s\n' "${to_install[@]}"
-        echo
-
-        if confirm "Continue?"; then
-            # Install one at a time so a single missing package
-            # doesn't abort the whole batch.
-            local failed=()
-            for pkg in "${to_install[@]}"; do
-                if ! sudo zypper install -y --no-recommends "$pkg"; then
-                    failed+=("$pkg")
-                fi
-            done
-
-            if [[ ${#failed[@]} -gt 0 ]]; then
-                warn "These packages failed to install:"
-                printf '  %s\n' "${failed[@]}"
-                warn "You may need to find alternate sources for them."
-            fi
-        else
-            warn "Skipping repository package installation."
-        fi
-    fi
-
-    install_opensuse_extras
-}
-
-install_opensuse_extras() {
-    step "Installing openSUSE extras (non-repo packages)"
-
-    # ── VSCodium (OBS home:kwk:vscodium) ─────
-    if command -v codium >/dev/null 2>&1; then
-        info "✓ codium already installed"
-    else
-        info "Adding VSCodium repo"
-        sudo rpm --import https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg 2>/dev/null || true
-        sudo zypper addrepo -f \
-            https://download.opensuse.org/repositories/home:kwk:vscodium/openSUSE_Tumbleweed/ \
-            vscodium 2>/dev/null || true
-        sudo zypper --gpg-auto-import-keys refresh
-        sudo zypper install -y codium || warn "VSCodium install failed."
-    fi
-
-    # ── Vivaldi (official repo) ──────────────
-    if command -v vivaldi >/dev/null 2>&1 || command -v vivaldi-stable >/dev/null 2>&1; then
-        info "✓ Vivaldi already installed"
-    else
-        info "Adding Vivaldi repo"
-        sudo rpm --import https://repo.vivaldi.com/archive/linux_signing_key.pub 2>/dev/null || true
-        sudo zypper addrepo -f \
-            https://repo.vivaldi.com/archive/rpm/x86_64 \
-            vivaldi 2>/dev/null || true
-        sudo zypper --gpg-auto-import-keys refresh
-        sudo zypper install -y vivaldi-stable || warn "Vivaldi install failed."
-    fi
-
-    # ── cliphist (build from source) ─────────
-    if command -v cliphist >/dev/null 2>&1; then
-        info "✓ cliphist already installed"
-    else
-        info "cliphist is not packaged on openSUSE; building from source"
-
-        if ! command -v go >/dev/null 2>&1; then
-            if confirm "cliphist needs Go. Install 'go' now?"; then
-                sudo zypper install -y go || warn "Go install failed."
-            fi
-        fi
-
-        if command -v go >/dev/null 2>&1; then
-            local tmpdir
-            tmpdir="$(mktemp -d)"
-            if git clone --depth=1 https://github.com/sentriz/cliphist "$tmpdir/cliphist"; then
-                if (cd "$tmpdir/cliphist" && go build -o cliphist .); then
-                    sudo install -Dm755 "$tmpdir/cliphist/cliphist" /usr/local/bin/cliphist
-                    info "✓ cliphist installed to /usr/local/bin/cliphist"
-                else
-                    warn "cliphist build failed."
-                fi
-            else
-                warn "cliphist clone failed."
-            fi
-            rm -rf "$tmpdir"
-        else
-            warn "Skipping cliphist (Go not available)."
-        fi
-    fi
-
-    # ── Fonts not packaged on openSUSE ───────
-    install_opensuse_fonts
-}
-
-install_opensuse_fonts() {
-    local font_dir="$HOME/.local/share/fonts"
-    mkdir -p "$font_dir"
-
-    if compgen -G "$font_dir/JetBrainsMono*NerdFont*.ttf" >/dev/null; then
-        info "✓ JetBrains Mono Nerd Font already installed"
-    else
-        info "Downloading JetBrains Mono Nerd Font"
-        local tmpzip
-        tmpzip="$(mktemp)"
-        if curl -fL -o "$tmpzip" \
-            "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/JetBrainsMono.zip"; then
-            unzip -o "$tmpzip" -d "$font_dir" >/dev/null
-            info "✓ JetBrains Mono Nerd Font installed"
-        else
-            warn "JetBrains Mono Nerd Font download failed."
-        fi
-        rm -f "$tmpzip"
-    fi
-
-    # Geist Mono Nerd Font (Arch: otf-geist-mono-nerd)
-    if compgen -G "$font_dir/GeistMono*NerdFont*" >/dev/null; then
-        info "✓ Geist Mono Nerd Font already installed"
-    else
-        info "Downloading Geist Mono Nerd Font"
-        local tmpzip
-        tmpzip="$(mktemp)"
-        if curl -fL -o "$tmpzip" \
-            "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/GeistMono.zip"; then
-            unzip -o "$tmpzip" -d "$font_dir" >/dev/null
-            info "✓ Geist Mono Nerd Font installed"
-        else
-            warn "Geist Mono Nerd Font download failed."
-        fi
-        rm -f "$tmpzip"
-    fi
-
-    if command -v fc-cache >/dev/null 2>&1; then
-        fc-cache -f "$font_dir" >/dev/null 2>&1 || true
     fi
 }
 
@@ -631,10 +401,11 @@ install_configs() {
             "$BACKUP/.config"
     done
 
-    local scripts_dir="$HOME/.config/hypr/scripts"
+        local scripts_dir="$HOME/.config/hypr/scripts"
     if compgen -G "$scripts_dir/*.sh" >/dev/null; then
         chmod +x "$scripts_dir/"*.sh
     fi
+
 }
 
 # ─────────────────────────────────────────────
@@ -657,19 +428,19 @@ install_themes() {
             "$BACKUP/.themes"
     done
 
-    if command -v gsettings >/dev/null 2>&1; then
-        if ! gsettings set org.gnome.desktop.interface gtk-theme "Gruvbox-Material-Dark"; then
-            warn "Could not set GTK theme."
-        fi
-
-        if ! gsettings set org.gnome.desktop.interface icon-theme "Papirus"; then
-            warn "Could not set icon theme."
-        fi
-    else
-        warn "gsettings not found; skipping GTK theme settings."
+if command -v gsettings >/dev/null 2>&1; then
+    if ! gsettings set org.gnome.desktop.interface gtk-theme "Gruvbox-Material-Dark"; then
+        warn "Could not set GTK theme."
     fi
-}
 
+    if ! gsettings set org.gnome.desktop.interface icon-theme "Papirus"; then
+        warn "Could not set icon theme."
+    fi
+else
+    warn "gsettings not found; skipping GTK theme settings."
+fi
+
+} 
 # ─────────────────────────────────────────────
 # Main
 # ─────────────────────────────────────────────
