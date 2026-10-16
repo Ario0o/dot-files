@@ -99,7 +99,7 @@ If you'd like to use symlinks instead, run:
 ```
 
 The script will:
-- Detect your distribution (auto-install supported for **Arch / CachyOS**. 
+- Detect your distribution (auto-install supported for **Arch / CachyOS**) 
 - Install configs into `~/.config/` and themes into `~/.themes/`, backing up anything it overwrites to `~/.dotfiles-backup-<timestamp>`.
 
 ## update config
