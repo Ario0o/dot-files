@@ -147,7 +147,7 @@ If you are using symlinks, run:
 ```bash
 sudo pacman -S --needed --noconfirm \
     hyprland swaync uwsm \
-    rofi-wayland \
+    rofi-wayland obsidian \
     kitty fish starship \
     awww pamixer alacritty \
     thunar thunar-volman gvfs gthumb \

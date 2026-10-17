@@ -70,9 +70,11 @@ PACMAN_PKGS=(
     wireplumber
     pavucontrol
     pamixer
+    blueman
     bluez
     bluez-utils
     vscodium
+    obsidian
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-gnome
     qt5-wayland
