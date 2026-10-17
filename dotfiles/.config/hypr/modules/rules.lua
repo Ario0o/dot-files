@@ -4,11 +4,7 @@ hl.on("config.reloaded", function()
     hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme \"Gruvbox-Material-Dark\"")
 end)
 
-hl.layer_rule({
-    match = { namespace = "gtk-layer-shell" },
-    no_anim = true,
-})
-
+--fix waybar flickering
 hl.layer_rule({
     match = { namespace = "waybar" },
     blur = true,

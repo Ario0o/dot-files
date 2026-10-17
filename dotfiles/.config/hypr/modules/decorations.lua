@@ -9,8 +9,6 @@ hl.config({
             active_border = "#7daea3",
             inactive_border = "#7daea3",
         },
-        layout = "dwindle",
-        allow_tearing = false,
     },
 
     decoration = {
