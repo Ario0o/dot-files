@@ -50,7 +50,7 @@
         {
           "label": "󰂯",
           "tooltip": "Toggle Bluetooth",
-          "command": "wifi-manager --toggle"
+          "command": "blueman-manager"
         },
         {
           "label": "󱣵",

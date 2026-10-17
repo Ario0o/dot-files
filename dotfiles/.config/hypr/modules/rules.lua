@@ -21,6 +21,12 @@ hl.layer_rule({
     ignore_alpha = 0.3,
 })
 
+hl.window_rule({
+    match = { class = "blueman-manager" },
+    float = true,
+    size = {400, 300},
+})
+
 hl.config({
     general = {
         resize_on_border = true,

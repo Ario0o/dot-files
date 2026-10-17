@@ -68,6 +68,7 @@ My personal Hyprland setup on CachyOS.
 - Btop
 - awww
 - Wifi manager
+- Blueman
 - Vivaldi browser 
 - vim
 
@@ -157,7 +158,7 @@ sudo pacman -S --needed --noconfirm \
     xdg-desktop-portal-hyprland \
     qt5-wayland qt6-wayland \
     ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji \
-    vscodium vim \
+    vscodium vim blueman \
     hyprlock hyprpicker batsignal \
     btop qt6ct polkit-gnome xdg-desktop-portal-gnome \
     flat-remix-gtk-4.0 imagemagick file-roller \
