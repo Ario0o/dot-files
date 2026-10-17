@@ -24,7 +24,7 @@ hl.layer_rule({
 hl.window_rule({
     match = { class = "blueman-manager" },
     float = true,
-    size = {400, 300},
+    size = {500, 350},
 })
 
 hl.config({
