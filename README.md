@@ -62,6 +62,7 @@ My personal Hyprland setup on CachyOS.
 - Rofi
 - Kitty
 - VScodium
+- obsidian
 - Starship
 - Cava
 - Thunar
