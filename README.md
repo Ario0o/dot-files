@@ -129,6 +129,7 @@ If you are using symlinks, run:
 │   ├── rofi/
 │   ├── kitty/
 │   ├── fish/
+│   ├── qt6ct/
 │   ├── starship/
 │   ├── cava/
 │   ├── wifi-manager/
