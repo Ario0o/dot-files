@@ -1,2 +1,4 @@
-export HYPRCURSOR_THEME="pop"
-export XCURSOR_THEME="pop"
+export HYPRCURSOR_THEME="Breeze"
+export XCURSOR_THEME="Breeze"
+export HYPRCURSOR_SIZE="20"
+export XCURSOR_SIZE="20"
