@@ -24,6 +24,7 @@ My personal Hyprland setup on CachyOS.
 | `cava` | Audio visualizer |
 | `uwsm` | Session manager |
 | `wifi-manager` | Wi-Fi management (TUI/GUI) |
+| `qt6ct` | qt6ct config | 
 | `GTK-3.0` | GTK config |
 | `GTK-4.0` | GTK config |
 | `Gruvbox-Material-Dark` | GTK theme |
