@@ -29,5 +29,5 @@ Thumbs.db
 backup/
 backups/
 *.backup
-
+.vscode
 dotfiles/.config/fish/fish_variables
