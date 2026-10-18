@@ -111,6 +111,7 @@ CONFIGS=(
     rofi
     swaync
     uwsm
+    qt6ct
     waybar
     wifi-manager
 )
