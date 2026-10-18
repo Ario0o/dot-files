@@ -74,7 +74,7 @@ PACMAN_PKGS=(
     bluez
     bluez-utils
     vscodium
-    obsidian
+    kate
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-gnome
     qt5-wayland
@@ -87,6 +87,7 @@ PACMAN_PKGS=(
     alacritty
     polkit-gnome
     qt6ct
+    kvantum
     btop
     batsignal
     hyprpicker

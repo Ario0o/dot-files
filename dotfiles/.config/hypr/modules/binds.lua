@@ -7,7 +7,7 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd("thunar"))
 hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("~/.config/rofi/type-2/launcher.sh"))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("vivaldi"))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("codium"))
-hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd("obsidian"))
+hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd("kate"))
 
 hl.bind(mainMod .. " + Tab", hl.dsp.focus({ workspace = "m+1" }))
 

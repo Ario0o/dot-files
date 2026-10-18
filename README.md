@@ -62,7 +62,7 @@ My personal Hyprland setup on CachyOS.
 - Rofi
 - Kitty
 - VScodium
-- obsidian
+- kate
 - Starship
 - Cava
 - Thunar
@@ -148,7 +148,7 @@ If you are using symlinks, run:
 ```bash
 sudo pacman -S --needed --noconfirm \
     hyprland swaync uwsm \
-    rofi-wayland obsidian \
+    rofi-wayland kate \
     kitty fish starship \
     awww pamixer alacritty \
     thunar thunar-volman gvfs gthumb \
@@ -163,7 +163,7 @@ sudo pacman -S --needed --noconfirm \
     hyprlock hyprpicker batsignal \
     btop qt6ct polkit-gnome xdg-desktop-portal-gnome \
     flat-remix-gtk-4.0 imagemagick file-roller \
-    papirus-icon-theme
+    papirus-icon-theme kvantum
 ```
 
 ```bash
