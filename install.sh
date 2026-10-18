@@ -2,47 +2,39 @@
 
 set -Eeuo pipefail
 
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-RED='\033[0;31m'
-BLUE='\033[0;34m'
-NC='\033[0m'
+readonly GREEN='\033[0;32m'
+readonly YELLOW='\033[1;33m'
+readonly RED='\033[0;31m'
+readonly BLUE='\033[0;34m'
+readonly NC='\033[0m'
 
 info() {
-    echo -e "${GREEN}[INFO]${NC} $1"
+    printf "%b[INFO]%b %s\n" "$GREEN" "$NC" "$1"
 }
 
 warn() {
-    echo -e "${YELLOW}[WARN]${NC} $1"
+    printf "%b[WARN]%b %s\n" "$YELLOW" "$NC" "$1"
 }
 
 error() {
-    echo -e "${RED}[ERROR]${NC} $1"
+    printf "%b[ERROR]%b %s\n" "$RED" "$NC" "$1"
 }
 
 step() {
-    echo -e "${BLUE}==>${NC} $1"
+    printf "%b==>%b %s\n" "$BLUE" "$NC" "$1"
 }
-
-# ─────────────────────────────────────────────
-# Safety checks
-# ─────────────────────────────────────────────
 
 if [[ $EUID -eq 0 ]]; then
     error "Do not run this script as root."
     exit 1
 fi
 
-# ─────────────────────────────────────────────
-# Paths and configuration
-# ─────────────────────────────────────────────
+readonly DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly SRC="$DOTFILES/dotfiles/.config"
+readonly THEMES_SRC="$DOTFILES/dotfiles/.themes"
+readonly BACKUP="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 
-DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SRC="$DOTFILES/dotfiles/.config"
-THEMES_SRC="$DOTFILES/dotfiles/.themes"
-BACKUP="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
-
-PACMAN_PKGS=(
+declare -ra PACMAN_PKGS=(
     hyprland
     swaync
     uwsm
@@ -96,12 +88,12 @@ PACMAN_PKGS=(
     imagemagick
 )
 
-AUR_PKGS=(
+declare -ra AUR_PKGS=(
     waybar-cava-git
     otf-geist-mono-nerd
 )
 
-CONFIGS=(
+declare -ra CONFIGS=(
     cava
     fish
     gtk-3.0
@@ -116,18 +108,14 @@ CONFIGS=(
     wifi-manager
 )
 
-FILES=(
+declare -ra FILES=(
     starship.toml
 )
 
-THEMES=(
+declare -ra THEMES=(
     Gruvbox-Material-Dark
     Gruvbox-Material-Dark-HIDPI
 )
-
-# ─────────────────────────────────────────────
-# Options
-# ─────────────────────────────────────────────
 
 SKIP_DEPS=false
 USE_SYMLINKS=false
@@ -156,26 +144,17 @@ EOF
 
         *)
             error "Unknown option: $arg"
-            echo "Use './install.sh --help' for usage."
+            printf "Use './install.sh --help' for usage.\n"
             exit 2
             ;;
     esac
 done
-
-# ─────────────────────────────────────────────
-# Validate source directories
-# ─────────────────────────────────────────────
 
 if [[ ! -d "$SRC" ]]; then
     error "Config source directory not found:"
     error "$SRC"
     exit 1
 fi
-
-# ─────────────────────────────────────────────
-# Prompt helper
-# ─────────────────────────────────────────────
-
 
 confirm() {
     local prompt="$1"
@@ -187,10 +166,6 @@ confirm() {
 
     [[ "$reply" =~ ^[Yy]?$ ]]
 }
-
-# ─────────────────────────────────────────────
-# Package installation
-# ─────────────────────────────────────────────
 
 install_deps() {
     step "Installing dependencies"
@@ -213,7 +188,6 @@ install_arch() {
     local aur_to_install=()
     local aur_helper=""
 
-    # Update system
     step "Updating the system"
 
     if ! sudo pacman -Syu; then
@@ -221,7 +195,6 @@ install_arch() {
         return 1
     fi
 
-    # Find missing official repository packages
     for pkg in "${PACMAN_PKGS[@]}"; do
         if pacman -Qi "$pkg" &>/dev/null; then
             info "✓ $pkg already installed"
@@ -233,10 +206,10 @@ install_arch() {
     if [[ ${#to_install[@]} -eq 0 ]]; then
         info "All official repository packages are already installed."
     else
-        echo
+        printf "\n"
         warn "The following packages will be installed from official repositories:"
         printf '  %s\n' "${to_install[@]}"
-        echo
+        printf "\n"
 
         if confirm "Continue?"; then
             if ! sudo pacman -S --needed --noconfirm "${to_install[@]}"; then
@@ -248,7 +221,6 @@ install_arch() {
         fi
     fi
 
-    # Detect AUR helper
     if command -v paru >/dev/null 2>&1; then
         aur_helper="paru"
     elif command -v yay >/dev/null 2>&1; then
@@ -259,7 +231,6 @@ install_arch() {
         return 0
     fi
 
-    # Find missing AUR packages
     for pkg in "${AUR_PKGS[@]}"; do
         if pacman -Qi "$pkg" &>/dev/null; then
             info "✓ $pkg already installed"
@@ -273,10 +244,10 @@ install_arch() {
         return 0
     fi
 
-    echo
+    printf "\n"
     warn "The following AUR packages will be installed:"
     printf '  %s\n' "${aur_to_install[@]}"
-    echo
+    printf "\n"
 
     if confirm "Continue?"; then
         if ! "$aur_helper" -S --needed --noconfirm "${aur_to_install[@]}"; then
@@ -287,10 +258,6 @@ install_arch() {
         warn "Skipping AUR package installation."
     fi
 }
-
-# ─────────────────────────────────────────────
-# Set fish as shell
-# ─────────────────────────────────────────────
 
 set_fish_default() {
     local fish_path
@@ -316,17 +283,13 @@ set_fish_default() {
     fi
 }
 
-# ─────────────────────────────────────────────
-# Distro detection
-# ─────────────────────────────────────────────
-
 detect_distro() {
     if [[ -f /etc/os-release ]]; then
         # shellcheck disable=SC1091
         source /etc/os-release
-        echo "${ID:-unknown}"
+        printf "%s\n" "${ID:-unknown}"
     else
-        echo "unknown"
+        printf "unknown\n"
     fi
 }
 
@@ -336,10 +299,6 @@ if [[ "$DISTRO" == "cachyos" ]]; then
     PACMAN_PKGS+=(paru)
 fi
 
-# ─────────────────────────────────────────────
-# Backup helper
-# ─────────────────────────────────────────────
-
 backup_path() {
     local source_path="$1"
     local backup_dir="$2"
@@ -348,10 +307,6 @@ backup_path() {
     mv "$source_path" "$backup_dir/"
     info "Backed up $source_path"
 }
-
-# ─────────────────────────────────────────────
-# Copy or symlink helper
-# ─────────────────────────────────────────────
 
 install_path() {
     local source="$1"
@@ -380,10 +335,6 @@ install_path() {
     fi
 }
 
-# ─────────────────────────────────────────────
-# Install configs
-# ─────────────────────────────────────────────
-
 install_configs() {
     if [[ "$USE_SYMLINKS" == true ]]; then
         step "Installing configs as symlinks"
@@ -407,16 +358,11 @@ install_configs() {
             "$BACKUP/.config"
     done
 
-        local scripts_dir="$HOME/.config/hypr/scripts"
+    local scripts_dir="$HOME/.config/hypr/scripts"
     if compgen -G "$scripts_dir/*.sh" >/dev/null; then
         chmod +x "$scripts_dir/"*.sh
     fi
-
 }
-
-# ─────────────────────────────────────────────
-# Install themes
-# ─────────────────────────────────────────────
 
 install_themes() {
     if [[ "$USE_SYMLINKS" == true ]]; then
@@ -434,22 +380,18 @@ install_themes() {
             "$BACKUP/.themes"
     done
 
-if command -v gsettings >/dev/null 2>&1; then
-    if ! gsettings set org.gnome.desktop.interface gtk-theme "Gruvbox-Material-Dark"; then
-        warn "Could not set GTK theme."
-    fi
+    if command -v gsettings >/dev/null 2>&1; then
+        if ! gsettings set org.gnome.desktop.interface gtk-theme "Gruvbox-Material-Dark"; then
+            warn "Could not set GTK theme."
+        fi
 
-    if ! gsettings set org.gnome.desktop.interface icon-theme "Papirus"; then
-        warn "Could not set icon theme."
+        if ! gsettings set org.gnome.desktop.interface icon-theme "Papirus"; then
+            warn "Could not set icon theme."
+        fi
+    else
+        warn "gsettings not found; skipping GTK theme settings."
     fi
-else
-    warn "gsettings not found; skipping GTK theme settings."
-fi
-
-} 
-# ─────────────────────────────────────────────
-# Main
-# ─────────────────────────────────────────────
+}
 
 info "Detected distro: $DISTRO"
 
@@ -472,7 +414,7 @@ install_configs
 install_themes
 set_fish_default
 
-echo
+printf "\n"
 info "Installation complete."
 
 if [[ -d "$BACKUP" ]]; then
@@ -486,3 +428,4 @@ else
 fi
 
 info "Log out and back in, or restart Hyprland, to apply changes."
+ 
