@@ -87,6 +87,7 @@ PACMAN_PKGS=(
     alacritty
     polkit-gnome
     qt6ct
+    breeze
     kvantum
     btop
     batsignal

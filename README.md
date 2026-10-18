@@ -163,7 +163,7 @@ sudo pacman -S --needed --noconfirm \
     hyprlock hyprpicker batsignal \
     btop qt6ct polkit-gnome xdg-desktop-portal-gnome \
     flat-remix-gtk-4.0 imagemagick file-roller \
-    papirus-icon-theme kvantum
+    papirus-icon-theme kvantum breeze
 ```
 
 ```bash
