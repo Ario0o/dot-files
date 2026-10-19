@@ -113,32 +113,6 @@ If you want to update your dots to a newer version without changing your config 
 ./update_config.sh
 ```
 
-## Structure 
-
-```bash
-.
-├── dotfiles/
-│   ├── hypr/
-│   ├── waybar/
-│   ├── swaync/
-│   ├── rofi/
-│   ├── kitty/
-│   ├── fish/
-│   ├── qt6ct/
-│   ├── starship/
-│   ├── cava/
-│   ├── wifi-manager/
-│   ├── GTK-3.0/
-│   ├── GTK-4.0/
-│   └── Gruvbox-Material-Dark/
-├── screenshots/
-├── install.sh
-├── update_config.sh
-├── README.md
-├── LICENSE
-└── .gitignore
-```
-
 ## install dependencies separately
 
 ```bash
