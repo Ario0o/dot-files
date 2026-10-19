@@ -34,7 +34,7 @@ readonly SRC="$DOTFILES/dotfiles/.config"
 readonly THEMES_SRC="$DOTFILES/dotfiles/.themes"
 readonly BACKUP="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 
-declare -ra PACMAN_PKGS=(
+declare -a PACMAN_PKGS=(
     hyprland
     swaync
     uwsm
@@ -88,12 +88,12 @@ declare -ra PACMAN_PKGS=(
     imagemagick
 )
 
-declare -ra AUR_PKGS=(
+declare -a AUR_PKGS=(
     waybar-cava-git
     otf-geist-mono-nerd
 )
 
-declare -ra CONFIGS=(
+declare -a CONFIGS=(
     cava
     fish
     gtk-3.0
@@ -108,11 +108,11 @@ declare -ra CONFIGS=(
     wifi-manager
 )
 
-declare -ra FILES=(
+declare -a FILES=(
     starship.toml
 )
 
-declare -ra THEMES=(
+declare -a THEMES=(
     Gruvbox-Material-Dark
     Gruvbox-Material-Dark-HIDPI
 )
@@ -428,4 +428,3 @@ else
 fi
 
 info "Log out and back in, or restart Hyprland, to apply changes."
- 
