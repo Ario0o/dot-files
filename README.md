@@ -107,16 +107,10 @@ The script will:
 
 ## update config
 
-If you want to update your dots and config to a newer version, run:
+If you want to update your dots to a newer version without changing your config files, run:
 
 ```bash
 ./update_config.sh
-```
-
-If you are using symlinks, run:
-
-```bash
-./update_config.sh --symlink
 ```
 
 ## Structure 
