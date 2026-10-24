@@ -121,7 +121,7 @@ sudo pacman -S --needed --noconfirm \
     rofi-wayland kate \
     kitty fish starship \
     awww pamixer alacritty \
-    thunar thunar-volman gvfs gthumb \
+    thunar thunar-volman gvfs gthumb gvfs-mtp \
     brightnessctl playerctl cava \
     grim slurp wl-clipboard cliphist \
     pipewire pipewire-pulse wireplumber pavucontrol \

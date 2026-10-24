@@ -48,6 +48,7 @@ declare -a PACMAN_PKGS=(
     thunar-volman
     file-roller
     gvfs
+    gvfs-mtp
     gthumb
     vivaldi
     cava
