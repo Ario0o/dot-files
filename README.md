@@ -67,7 +67,7 @@ My personal Hyprland setup on CachyOS.
 - Starship
 - Cava
 - Thunar
-- Btop
+- Resources
 - awww
 - Wifi manager
 - Blueman
@@ -120,7 +120,7 @@ sudo pacman -S --needed --noconfirm \
     hyprland swaync uwsm \
     rofi-wayland kate \
     kitty fish starship \
-    awww pamixer alacritty \
+    awww pamixer breeze\
     thunar thunar-volman gvfs gthumb gvfs-mtp \
     brightnessctl playerctl cava \
     grim slurp wl-clipboard cliphist \
@@ -131,15 +131,16 @@ sudo pacman -S --needed --noconfirm \
     ttf-jetbrains-mono-nerd noto-fonts noto-fonts-emoji \
     vscodium vim blueman \
     hyprlock hyprpicker batsignal \
-    btop qt6ct polkit-gnome xdg-desktop-portal-gnome \
+    resources qt6ct polkit-gnome xdg-desktop-portal-gnome \
     flat-remix-gtk-4.0 imagemagick file-roller \
-    papirus-icon-theme kvantum breeze
+    papirus-icon-theme kvantum
 ```
 
 ```bash
 paru -S --needed \
     waybar-cava-git \
-    otf-geist-mono-nerd
+    otf-geist-mono-nerd \
+    bibata-cursor-theme
 ```
 
 ## Credits 

@@ -1,4 +1,4 @@
-export HYPRCURSOR_THEME="Breeze"
-export XCURSOR_THEME="Breeze"
+export HYPRCURSOR_THEME="Bibata-Modern-Classic"
+export XCURSOR_THEME="Bibata-Modern-Classic"
 export HYPRCURSOR_SIZE="20"
 export XCURSOR_SIZE="20"

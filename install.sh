@@ -77,12 +77,11 @@ declare -a PACMAN_PKGS=(
     noto-fonts-emoji
     papirus-icon-theme
     vim
-    alacritty
     polkit-gnome
     qt6ct
     breeze
     kvantum
-    btop
+    resources
     batsignal
     hyprpicker
     hyprlock
@@ -92,6 +91,7 @@ declare -a PACMAN_PKGS=(
 declare -a AUR_PKGS=(
     waybar-cava-git
     otf-geist-mono-nerd
+    bibata-cursor-theme
 )
 
 declare -a CONFIGS=(
