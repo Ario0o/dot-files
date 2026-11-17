@@ -43,6 +43,7 @@ declare -a PACMAN_PKGS=(
     fish
     starship
     awww
+    git
     thunar
     thunar-archive-plugin
     thunar-volman
@@ -63,6 +64,7 @@ declare -a PACMAN_PKGS=(
     wireplumber
     pavucontrol
     pamixer
+    base-devel
     blueman
     bluez
     bluez-utils
@@ -178,8 +180,9 @@ install_deps() {
 
         *)
             warn "Distro '$DISTRO' is not supported for automatic installation."
-            warn "Please install the packages listed in README.md manually."
-            return 1
+            warn "Skipping dependency installation; install the packages listed in README.md manually."
+            warn "Continuing with config installation."
+            return 0
             ;;
     esac
 }
@@ -207,18 +210,39 @@ install_arch() {
     if [[ ${#to_install[@]} -eq 0 ]]; then
         info "All official repository packages are already installed."
     else
-        printf "\n"
-        warn "The following packages will be installed from official repositories:"
-        printf '  %s\n' "${to_install[@]}"
-        printf "\n"
+        local available=()
+        local missing=()
 
-        if confirm "Continue?"; then
-            if ! sudo pacman -S --needed --noconfirm "${to_install[@]}"; then
-                error "Official package installation failed."
-                return 1
+        for pkg in "${to_install[@]}"; do
+            if pacman -Si "$pkg" &>/dev/null; then
+                available+=("$pkg")
+            else
+                missing+=("$pkg")
             fi
+        done
+
+        if [[ ${#missing[@]} -gt 0 ]]; then
+            warn "Packages not found in official repositories (skipping):"
+            printf '  %s\n' "${missing[@]}"
+            printf "\n"
+        fi
+
+        if [[ ${#available[@]} -eq 0 ]]; then
+            info "Nothing to install from official repositories."
         else
-            warn "Skipping official repository package installation."
+            printf "\n"
+            warn "The following packages will be installed from official repositories:"
+            printf '  %s\n' "${available[@]}"
+            printf "\n"
+
+            if confirm "Continue?"; then
+                if ! sudo pacman -S --needed --noconfirm "${available[@]}"; then
+                    error "Official package installation failed."
+                    return 1
+                fi
+            else
+                warn "Skipping official repository package installation."
+            fi
         fi
     fi
 
