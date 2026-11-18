@@ -23,7 +23,7 @@ My personal Hyprland setup on CachyOS.
 | `starship` | Shell prompt |
 | `cava` | Audio visualizer |
 | `uwsm` | Session manager |
-| `wifi-manager` | Wi-Fi management (TUI/GUI) |
+| `nmrs` | Wi-Fi management |
 | `qt6ct` | qt6ct config |
 | `GTK-3.0` | GTK config |
 | `GTK-4.0` | GTK config |
@@ -150,11 +150,11 @@ cd ~/dot-files
 ### Install AUR packages
 
 ```bash
-paru -S --needed waybar-cava-git otf-geist-mono-nerd bibata-cursor-theme
+paru -S --needed waybar-cava-git otf-geist-mono-nerd bibata-cursor-theme nmrs-bin
 
 # or
 
-yay -S --needed waybar-cava-git otf-geist-mono-nerd bibata-cursor-theme
+yay -S --needed waybar-cava-git otf-geist-mono-nerd bibata-cursor-theme nmrs-bin
 ```
 
 ### Back up existing configs
@@ -176,7 +176,6 @@ mkdir -p "$BACKUP/.config" "$BACKUP/.themes"
 [ -e "$HOME/.config/uwsm" ] && mv "$HOME/.config/uwsm" "$BACKUP/.config/"
 [ -e "$HOME/.config/qt6ct" ] && mv "$HOME/.config/qt6ct" "$BACKUP/.config/"
 [ -e "$HOME/.config/waybar" ] && mv "$HOME/.config/waybar" "$BACKUP/.config/"
-[ -e "$HOME/.config/wifi-manager" ] && mv "$HOME/.config/wifi-manager" "$BACKUP/.config/"
 [ -e "$HOME/.config/starship.toml" ] && mv "$HOME/.config/starship.toml" "$BACKUP/.config/"
 
 [ -e "$HOME/.themes/Gruvbox-Material-Dark" ] && mv "$HOME/.themes/Gruvbox-Material-Dark" "$BACKUP/.themes/"
@@ -187,7 +186,7 @@ mkdir -p "$BACKUP/.config" "$BACKUP/.themes"
 
 ```bash
 mkdir -p ~/.config
-cp -a dotfiles/.config/{cava,fish,gtk-3.0,gtk-4.0,hypr,kitty,rofi,swaync,uwsm,qt6ct,waybar,wifi-manager,starship.toml} ~/.config/
+cp -a dotfiles/.config/{cava,fish,gtk-3.0,gtk-4.0,hypr,kitty,rofi,swaync,uwsm,qt6ct,waybar,starship.toml} ~/.config/
 ```
 
 ### Copy the themes

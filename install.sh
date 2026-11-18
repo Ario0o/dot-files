@@ -94,6 +94,7 @@ declare -a AUR_PKGS=(
     waybar-cava-git
     otf-geist-mono-nerd
     bibata-cursor-theme
+    nmrs-bin
 )
 
 declare -a CONFIGS=(
@@ -108,7 +109,6 @@ declare -a CONFIGS=(
     uwsm
     qt6ct
     waybar
-    wifi-manager
 )
 
 declare -a FILES=(

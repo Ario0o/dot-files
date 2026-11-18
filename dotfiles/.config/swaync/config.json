@@ -45,7 +45,7 @@
         {
           "label": " ",
           "tooltip": "Toggle Wi-Fi",
-          "command": "wifi-manager --toggle"
+          "command": "nmrs"
         },
         {
           "label": "󰂯",
