@@ -64,7 +64,7 @@ My personal Hyprland setup on CachyOS.
 - Thunar
 - Resources
 - awww
-- Wifi manager
+- nmrs
 - Blueman
 - Vivaldi browser
 - vim
