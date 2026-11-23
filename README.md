@@ -21,7 +21,6 @@ My personal Hyprland setup on CachyOS.
 | `kitty` | Terminal emulator |
 | `fish` | Shell |
 | `starship` | Shell prompt |
-| `cava` | Audio visualizer |
 | `uwsm` | Session manager |
 | `nmrs` | Wi-Fi management |
 | `qt6ct` | qt6ct config |
@@ -60,11 +59,11 @@ My personal Hyprland setup on CachyOS.
 - VScodium
 - kate
 - Starship
-- Cava
 - Thunar
 - Resources
 - awww
 - nmrs
+- cachy-update
 - Blueman
 - Vivaldi browser
 - vim
@@ -116,14 +115,14 @@ cd dot-files
 
 ```bash
 sudo pacman -S --needed --noconfirm \
-    hyprland swaync uwsm rofi-wayland kitty fish starship awww git \
+    hyprland swaync waybar uwsm rofi-wayland kitty fish starship awww git \
     thunar thunar-archive-plugin thunar-volman file-roller gvfs gvfs-mtp \
-    gthumb vivaldi cava brightnessctl playerctl grim slurp wl-clipboard \
+    gthumb vivaldi brightnessctl playerctl grim slurp wl-clipboard \
     cliphist pipewire pipewire-pulse wireplumber pavucontrol pamixer base-devel \
     blueman bluez bluez-utils vscodium kate xdg-desktop-portal-hyprland \
     xdg-desktop-portal-gnome qt5-wayland qt6-wayland ttf-jetbrains-mono-nerd \
     noto-fonts noto-fonts-emoji papirus-icon-theme vim polkit-gnome qt6ct \
-    breeze kvantum resources batsignal hyprpicker hyprlock imagemagick
+    breeze kvantum resources batsignal hyprpicker hyprlock imagemagick cachy-update
 ```
 
 ### Install an AUR helper
@@ -150,11 +149,11 @@ cd ~/dot-files
 ### Install AUR packages
 
 ```bash
-paru -S --needed waybar-cava-git otf-geist-mono-nerd bibata-cursor-theme nmrs-bin
+paru -S --needed otf-geist-mono-nerd bibata-cursor-theme nmrs-bin
 
 # or
 
-yay -S --needed waybar-cava-git otf-geist-mono-nerd bibata-cursor-theme nmrs-bin
+yay -S --needed waybar--git otf-geist-mono-nerd bibata-cursor-theme nmrs-bin
 ```
 
 ### Back up existing configs
@@ -166,7 +165,6 @@ BACKUP="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 mkdir -p "$BACKUP/.config" "$BACKUP/.themes"
 
 [ -e "$HOME/.config/hypr" ] && mv "$HOME/.config/hypr" "$BACKUP/.config/"
-[ -e "$HOME/.config/cava" ] && mv "$HOME/.config/cava" "$BACKUP/.config/"
 [ -e "$HOME/.config/fish" ] && mv "$HOME/.config/fish" "$BACKUP/.config/"
 [ -e "$HOME/.config/gtk-3.0" ] && mv "$HOME/.config/gtk-3.0" "$BACKUP/.config/"
 [ -e "$HOME/.config/gtk-4.0" ] && mv "$HOME/.config/gtk-4.0" "$BACKUP/.config/"
@@ -186,7 +184,7 @@ mkdir -p "$BACKUP/.config" "$BACKUP/.themes"
 
 ```bash
 mkdir -p ~/.config
-cp -a dotfiles/.config/{cava,fish,gtk-3.0,gtk-4.0,hypr,kitty,rofi,swaync,uwsm,qt6ct,waybar,starship.toml} ~/.config/
+cp -a dotfiles/.config/{fish,gtk-3.0,gtk-4.0,hypr,kitty,rofi,swaync,uwsm,qt6ct,waybar,starship.toml} ~/.config/
 ```
 
 ### Copy the themes

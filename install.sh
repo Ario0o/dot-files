@@ -37,6 +37,7 @@ readonly BACKUP="$HOME/.dotfiles-backup-$(date +%Y%m%d-%H%M%S)"
 declare -a PACMAN_PKGS=(
     hyprland
     swaync
+    waybar
     uwsm
     rofi-wayland
     kitty
@@ -52,7 +53,6 @@ declare -a PACMAN_PKGS=(
     gvfs-mtp
     gthumb
     vivaldi
-    cava
     brightnessctl
     playerctl
     grim
@@ -87,18 +87,17 @@ declare -a PACMAN_PKGS=(
     batsignal
     hyprpicker
     hyprlock
+    cachy-update
     imagemagick
 )
 
 declare -a AUR_PKGS=(
-    waybar-cava-git
     otf-geist-mono-nerd
     bibata-cursor-theme
     nmrs-bin
 )
 
 declare -a CONFIGS=(
-    cava
     fish
     gtk-3.0
     gtk-4.0
